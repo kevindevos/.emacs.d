@@ -26,7 +26,8 @@
 (tool-bar-mode -1) ;; disable gui tool bar
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; default emacs to start maximized
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers 
-(setq neo-show-hidden-files t)
+(setq neo-show-hidden-files t) ;; show hidden files in neotree
+(set-face-attribute 'default nil :height 120) ;; set font size to 12pt , value is 1/10 pt
 
 ;; open linum-mode for all files
 (add-hook 'find-file-hook 'linum-mode)
@@ -63,3 +64,4 @@
 ;; TODO doom emacs speed?
 ;; TODO yasnippet
 ;; TODO flycheck
+;; TODO auto add to known projects when theres a .projectile file
