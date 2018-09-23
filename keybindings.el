@@ -8,6 +8,7 @@
 (defconst my-leader-files-edit "SPC f e")
 (defconst my-leader-projectile "SPC p")
 (defconst my-leader-imenu "SPC i")
+(defconst my-leader-meghanada "SPC g")
 
 
 ;; general.el leader key definers
@@ -38,6 +39,9 @@
 
 (general-create-definer my-leader-imenu-def
   :prefix my-leader-imenu)
+
+(general-create-definer my-leader-meghanada-def
+  :prefix my-leader-meghanada)
 
 ; evil tweaks
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
@@ -157,7 +161,26 @@
   "i" 'helm-semantic-or-imenu
   )
 
-;;;;;;;;;;;;;;;;;;;; EDITING ;;;;;;;;;;;;;,,,,,
+;;;;;;;;;;;;;;; meghanada ;;;;;;;;;;;
+(my-leader-meghanada-def
+  :keymaps 'normal
+  "b" 'meghanada-back-jump
+  "c" 'meghanada-compile-project
+  "o" 'meghanada-optimize-import
+  "i" 'meghanada-reference
+  "K" 'meghanada-kill-running-process
+  "rd" 'meghanada-debug
+  "rr" 'meghanada-run-task
+  "trt" 'meghanada-run-junit-test-case
+  "trc" 'meghanada-run-junit-class
+  "tdc" 'meghanada-debug-junit-class
+  "jd" 'meghanada-jump-declaration
+  "js" 'meghanada-jump-symbol
+  "ts" 'meghanada-switch-testcase
+
+)
+  ;; meghanada-back-jump is M-,   NOTE: it saves a history, so it works more than once consecutively
+
 
 ;; to comment/uncomment use M-;
 
