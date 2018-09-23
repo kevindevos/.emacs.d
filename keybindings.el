@@ -52,12 +52,19 @@
 (global-unset-key (kbd "C-u"))
 (global-set-key (kbd "C-u") (lambda () (interactive) (evil-scroll-up 0)))
 
+;; magit enforce keybinding wtheck?
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; neotree
 (use-package neotree
   :config
   (define-key neotree-mode-map (kbd "C-l") 'neotree-select-up-node)
   (define-key neotree-mode-map (kbd "C-j") 'neotree-enter)
-  (define-key neotree-mode-map (kbd "[?\\t]") 'neotree-stretch-toggle)
+  (define-key neotree-mode-map (kbd "TAB") 'neotree-stretch-toggle)
+  (define-key neotree-mode-map (kbd "<tab>") 'neotree-stretch-toggle)
+  (define-key neotree-mode-map (kbd "RET") 'neotree-enter)
+  (define-key neotree-mode-map (kbd "<return>") 'neotree-enter)
+  
   )
 ;; Use C-c C-c in neotree mode to set dir to root dir
 
@@ -127,13 +134,19 @@
  )
 
 ;;;;;;;;;;;;;;;; Projects with projectile package ;;;;;;;;;;;;;;
-;; some of these dont work
+
+;; SPC p
 (my-leader-projectile-def
  :keymaps 'normal
  "i" 'projectile-project-info
- "f" 'projectile-find-file
- "p" 'projectile-switch-project
+ "f" 'helm-projectile-find-file
+ "F" 'helm-projectile-find-file-in-known-projects
+ "p" 'helm-projectile-switch-project
  "t" 'neotree-projectile-action 
+ "I" 'projectile-invalidate-cache
+ "r" 'helm-projectile-recentf
+ "R" 'projectile-remove-known-project
+ "s" 'helm-projectile-ag
  )
 
 

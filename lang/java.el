@@ -1,7 +1,8 @@
 ;; Java emacs configuration
 
+(require 'meghanada)
+(meghanada-mode 1)
+(setq projectile-indexing-method 'alien)
 
-;; try out LSP java instead of meghanada
-
-;;(require 'meghanada)
-;;(add-to-list 'company-backends 'company-meghanada)
+(require 'projectile)
+(add-to-list 'projectile-globally-ignored-directories "app/.meghanada")
