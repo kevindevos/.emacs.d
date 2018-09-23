@@ -1,0 +1,3 @@
+;; Elisp configuration
+
+(require 'paredit)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: setter
+# key: setter
+# --
+public function set$1($${1:$(downcase yas/text)}){
+       $this->${1:$(downcase yas/text)} = ${1:$(downcase yas/text)};
+}
