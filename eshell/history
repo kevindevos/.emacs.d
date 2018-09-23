@@ -1,0 +1,6 @@
+ag
+ag test -
+ag test .
+ag init.el /Users/kevindevos/
+ag init.el /Users/kevindevos
+ag init.el /Users/kevindevos/
