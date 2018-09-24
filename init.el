@@ -9,6 +9,13 @@
 ;; (function ...) is more or less equivalent to (quote ...) and that is equivalent to '... – using function instead of quote just helps the byte compiler a little bit.
 
 
+;; !!!!!!!!!!!!!
+;; Refactoring in emacs projects
+;; I now use helm-ag to find all instances of the function name (searches in all files, incl. subdirs, not just in open buffers), and
+;; then I use C-c C-e to enter a buffer that lists all the matches and there I change the function name. When I am done I press 
+;; C-c C-c (helm-ag--edit-commit) to store the changes to all the opened files.
+
+
 ;; Package management and add the melpa package archive
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
@@ -32,7 +39,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; set emacs starting buffer to the scrath buffer
 (setq initial-buffer-choice (lambda () (get-buffer "*scratch*")))
-(setq initial-scratch-message ";; SCRATCH BUFFER \n")
+(setq initial-scratch-message "")
 
 ;; general configuration
 (tool-bar-mode -1) ;; disable gui tool bar
@@ -81,6 +88,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; use evil in *Packages* buffer
 (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
 (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
+(add-to-list 'evil-buffer-regexps '("*Help*" . normal))
+(add-to-list 'evil-buffer-regexps '("*info*" . normal))
+
 
 (require 'which-key)
 (which-key-mode)
@@ -106,6 +116,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq mac-command-modifier 'meta) ;; command
 
 (require 'helm-projectile)
+(require 'info)
 ;; general makes it easy to manage keybindings
 (use-package general
   :config
@@ -120,8 +131,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; LANGUAGE SPECIFIC CONFIG
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 (add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
+(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 
 
 
@@ -135,7 +148,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     ("628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" default)))
  '(package-selected-packages
    (quote
-    (helm-projectile meghanada origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))))
+    (rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile meghanada origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

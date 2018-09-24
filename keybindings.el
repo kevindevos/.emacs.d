@@ -8,6 +8,7 @@
 (defconst my-leader-files-edit "SPC f e")
 (defconst my-leader-projectile "SPC p")
 (defconst my-leader-imenu "SPC i")
+(defconst my-leader-help "SPC I")
 (defconst my-leader-meghanada "SPC g")
 
 
@@ -42,6 +43,9 @@
 
 (general-create-definer my-leader-meghanada-def
   :prefix my-leader-meghanada)
+
+(general-create-definer my-leader-help-def
+  :prefix my-leader-help)
 
 ; evil tweaks
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
@@ -150,7 +154,7 @@
  "I" 'projectile-invalidate-cache
  "r" 'helm-projectile-recentf
  "R" 'projectile-remove-known-project
- "s" 'helm-projectile-ag
+ "sa" 'helm-projectile-ag
  )
 
 
@@ -167,7 +171,7 @@
   "b" 'meghanada-back-jump
   "c" 'meghanada-compile-project
   "o" 'meghanada-optimize-import
-  "i" 'meghanada-reference
+  "i" 'meghanada-reference ;; searches for references to symbol at point
   "K" 'meghanada-kill-running-process
   "rd" 'meghanada-debug
   "rr" 'meghanada-run-task
@@ -181,6 +185,13 @@
 )
   ;; meghanada-back-jump is M-,   NOTE: it saves a history, so it works more than once consecutively
 
+
+;; Help
+
+(my-leader-help-def
+  :keymaps 'normal
+  "t" 'info 
+  )
 
 ;; to comment/uncomment use M-;
 
