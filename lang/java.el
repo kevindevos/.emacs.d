@@ -8,7 +8,7 @@
 (add-to-list 'projectile-globally-ignored-directories "app/.meghanada")
 
 (require 'flycheck)
-(flycheck-mode)
+(flycheck-mode)				
 (flycheck-gradle-setup)
 
 (add-to-list 'evil-buffer-regexps '("*meghanada-reference*" . normal))

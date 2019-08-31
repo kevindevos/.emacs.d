@@ -1,6 +1,128 @@
-ag
-ag test -
-ag test .
-ag init.el /Users/kevindevos/
-ag init.el /Users/kevindevos
-ag init.el /Users/kevindevos/
+adb install -r app-debug.apk
+am
+/start
+adb shell am start -n com.example/com.example.kevin.MainActivity
+adb shell am start -n com.example/com.example.kevin.tracker.MainActivity
+adb shell am start -n com.example.tracker/com.example.kevin.tracker.MainActivity
+adb shell am start -n com.example.kevin/com.example.kevin.MainActivity
+adb shell
+aapt
+echo $PATH
+export PATH=/Users/kevindevos/Library/Android/sdk/build-tools/27.0.3:$PATH
+echo $PATH
+aapt
+echo $PATH
+cd /Users/kevindevos/Library/Android/sdk/build-tools/27.0.3
+aapt
+./appt
+./aapt
+aapt
+a
+aapt
+adb shell
+cd (projectile-project-roo)
+(projectile-project-root)
+cd app/build/outputs
+ls
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd builds
+ls
+cd build/outputs
+ls
+cd apk
+ls
+cd debug
+ls
+cd ~
+ls
+./bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
+sudo ./bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
+sudo bash bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
+sudo bash bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
+./brunAndroid 
+sudo bash ./brunAndroid.sh ~/Documents/Projects/trackerAndroid
+adb remove com.example.kevin.tracker
+adb uninstall com.example.kevin.tracker
+sudo bash ./brunAndroid.sh ~/Documents/Projects/trackerAndroid
+cd ~/Documents/Projects/trackerAndroid
+bash gradlew clean
+cd app
+ls
+cd ..
+sudo bash ~/brunAndroid.sh .
+cat ~/brunAndroid.sh
+sudo bash ~/brunAndroid.sh .
+cd app
+ls
+cd ..
+sudo bash ~/brunAndroid.sh .
+cd app
+ls
+cd ..
+cat ~/brunAndroid.sh
+cat ~/brunAndroid.sh
+sudo bash ~/brunAndroid.sh .
+sudo bash ~/brunAndroid.sh .
+sudo chmod 777 ~/brunAndroid.sh 
+ls -l ~ | grep .i android
+ls -l ~ | grep -i android
+ls
+cd app
+ls
+cd ..
+cd gradle
+ls
+cd ..
+cd ~/Documents/Projects/androidTracker
+cd Documents
+cd Projects
+ls
+cd trackerAndroid
+ls
+bash gradlew clean
+sudo rm -r app/build 
+ls app
+bash gradlew clean
+bash ~/brunAndroid.sh .
+bash gradlew clean
+ls app
+bash ~/brunAndroid.sh .
+bash gradlew clean
+bash ~/brunAndroid.sh .
+emulator -list-avds
+cd Documents/Projects/trackerAndroid/
+ls
+bash ~/brunAndroid.sh .
+emulator -list-avds
+emulator -avd Nexus8_0
+emulator -avd Nexus8_0 &
+bash ~/brunAndroid.sh .
+bash ~/brunAndroid.sh .
+bash ~/brunAndroid.sh .
+bash ~/brunAndroid.sh .
+bash ~/brunAndroid.sh . com.example.kevin.tracker
+bash ~/brunAndroid.sh . com.example.kevin.tracker
+ps -ax 
+ps -ax | grep -i projectile
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+adb pull /data/data/com.example.kevin.tracker/databases/TRACKER_DB 
+sudo adb pull /data/data/com.example.kevin.tracker/databases/TRACKER_DB 
+bash ~/brunAndroid.sh . com.example.kevin.tracker
+clear
+ls
+ls -R
+locate RecyclerViewAdapter.java
+git status
