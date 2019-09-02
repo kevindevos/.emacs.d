@@ -1,24 +1,3 @@
-adb install -r app-debug.apk
-am
-/start
-adb shell am start -n com.example/com.example.kevin.MainActivity
-adb shell am start -n com.example/com.example.kevin.tracker.MainActivity
-adb shell am start -n com.example.tracker/com.example.kevin.tracker.MainActivity
-adb shell am start -n com.example.kevin/com.example.kevin.MainActivity
-adb shell
-aapt
-echo $PATH
-export PATH=/Users/kevindevos/Library/Android/sdk/build-tools/27.0.3:$PATH
-echo $PATH
-aapt
-echo $PATH
-cd /Users/kevindevos/Library/Android/sdk/build-tools/27.0.3
-aapt
-./appt
-./aapt
-aapt
-a
-aapt
 adb shell
 cd (projectile-project-roo)
 (projectile-project-root)
@@ -126,3 +105,24 @@ ls
 ls -R
 locate RecyclerViewAdapter.java
 git status
+git status
+git add *
+git commit -m "refresh"
+git push
+finder .
+ls -l
+touch .projectile
+echo $CLASSPATH
+env
+ls
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+ls
+cd javaShoppingList-master/
+ls
+ls -la
+vim .gitignore
+ls

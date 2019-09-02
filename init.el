@@ -1,8 +1,10 @@
 ;; Package management and add the melpa package archive
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-
 (package-initialize)
+
+;; Garbage Collection higher threshold
+(setq gc-cons-threshold 200000000)
 
 ;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
@@ -16,7 +18,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (set-exec-path-from-shell-PATH)
 
-;; CONSTANTS
+;; constants 
 (defconst my-dotfile-path "~/.emacs.d/init.el")
 (defconst my-keybindings-file-path "~/.emacs.d/keybindings.el")
 
@@ -35,20 +37,20 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq ring-bell-function 'ignore) 
 
 ;; theme
-(load-theme 'leuven t)
-;; overide neotheme font face for files
-(defface neo-file-link-face
-  '((((background dark)) (:foreground "Black"))
-    (t                   (:foreground "Black")))
-  "*Face used for open file/dir in neotree buffer."
-  :group 'neotree :group 'font-lock-highlighting-faces)
-(defvar neo-file-link-face 'neo-file-link-face)
-(defface neo-dir-link-face
-  '((((background dark)) (:foreground "Dark" :weight bold))
-    (t                   (:foreground "Dark" :weight bold)))
-  "*Face used for expand sign [+] in neotree buffer."
-  :group 'neotree :group 'font-lock-highlighting-faces)
-(defvar neo-dir-link-face 'neo-dir-link-face)
+(load-theme 'sanityinc-tomorrow-eighties t)
+;overide neotheme font face for files
+;; (defface neo-file-link-face
+;;   '((((background dark)) (:foreground "Black"))
+;;     (t                   (:foreground "Black")))
+;;   "*Face used for open file/dir in neotree buffer."
+;;   :group 'neotree :group 'font-lock-highlighting-faces)
+;; (defvar neo-file-link-face 'neo-file-link-face)
+;; (defface neo-dir-link-face
+;;   '((((background dark)) (:foreground "Dark" :weight bold))
+;;     (t                   (:foreground "Dark" :weight bold)))
+;;   "*Face used for expand sign [+] in neotree buffer."
+;;   :group 'neotree :group 'font-lock-highlighting-faces)
+;; (defvar neo-dir-link-face 'neo-dir-link-face)
 
 ;; telephone line ( power line)
 (require 'telephone-line)
@@ -61,6 +63,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (use-package company
   :config
   (progn
+    (setq company-dabbrev-downcase 0)
     (setq company-idle-delay 0)
     (setq company-backends '(company-bbdb company-semantic company-clang company-capf company-keywords
 				      company-files company-dabbrev-code company-gtags company-etags 
@@ -123,7 +126,20 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq auto-save-default nil)
 
 
-;; LANGUAGE SPECIFIC CONFIG
+;; language specific configuration
+;; java eglot, set classpath before hook
+(require 'eglot)
+(defconst my/eclipse-jdt-home "/Users/kevindevos/Documents/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.5.500.v20190715-1310.jar")
+;;(defconst my/eclipse-jdt-home "/Users/kevindevos/Documents/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher.cocoa.macosx.x86_64_1.1.1100.v20190715-0945.jar")
+(defun my/eclipse-jdt-contact (interactive)
+  (let ((cp (getenv "CLASSPATH")))
+    (setenv "CLASSPATH" (concat cp ":" my/eclipse-jdt-home))
+    (unwind-protect
+        (eglot--eclipse-jdt-contact nil)
+      (setenv "CLASSPATH" cp))))
+(setcdr (assq 'java-mode eglot-server-programs) #'my/eclipse-jdt-contact)
+
+
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 (add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
@@ -158,6 +174,7 @@ or the current buffer directory."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(all-the-icons-scale-factor 0.6)
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
@@ -173,7 +190,7 @@ or the current buffer directory."
  '(hl-paren-colors (quote ("#40883f" "#0287c8" "#b85c57")))
  '(package-selected-packages
    (quote
-    (all-the-icons all-the-icons-dired all-the-icons-gnus android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile meghanada origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package)))
+    (dap-mode helm-lsp lsp-treemacs company-lsp lsp-java lsp-mode eglot all-the-icons android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package)))
  '(sml/active-background-color "#98ece8")
  '(sml/active-foreground-color "#424242")
  '(sml/inactive-background-color "#4fa8a8")
@@ -207,8 +224,6 @@ or the current buffer directory."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))

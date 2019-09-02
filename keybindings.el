@@ -9,7 +9,7 @@
 (defconst my-leader-projectile "SPC p")
 (defconst my-leader-imenu "SPC i")
 (defconst my-leader-help "SPC I")
-(defconst my-leader-meghanada "SPC g")
+(defconst my-leader-eval "SPC e")
 
 
 ;; general.el leader key definers
@@ -41,11 +41,12 @@
 (general-create-definer my-leader-imenu-def
   :prefix my-leader-imenu)
 
-(general-create-definer my-leader-meghanada-def
-  :prefix my-leader-meghanada)
-
 (general-create-definer my-leader-help-def
   :prefix my-leader-help)
+
+(general-create-definer my-leader-eval
+  :prefix my-leader-eval)
+
 
 ; evil tweaks
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
@@ -82,6 +83,7 @@
 (my-leader-emacs-def
   :keymaps 'normal
   "q" 'save-buffers-kill-emacs
+  "e" 'eshell
   "z" 'suspend-emacs
   )
 
@@ -97,6 +99,7 @@
  "t" 'neotree-project-dir-toggle
  "r" 'helm-recentf
  "L" 'helm-locate
+ "d" 'dired-jump
  )
 
 ;; todo helm recentfiles like spacemacs
@@ -167,24 +170,29 @@
   )
 
 ;;;;;;;;;;;;;;; meghanada ;;;;;;;;;;;
-(my-leader-meghanada-def
-  :keymaps 'normal
-  "b" 'meghanada-back-jump
-  "c" 'meghanada-compile-project
-  "o" 'meghanada-optimize-import
-  "i" 'meghanada-reference ;; searches for references to symbol at point
-  "K" 'meghanada-kill-running-process
-  "rd" 'meghanada-debug
-  "rr" 'meghanada-run-task
-  "trt" 'meghanada-run-junit-test-case
-  "trc" 'meghanada-run-junit-class
-  "tdc" 'meghanada-debug-junit-class
-  "jd" 'meghanada-jump-declaration
-  "js" 'meghanada-jump-symbol
-  "ts" 'meghanada-switch-testcase
+;; (my-leader-meghanada-def
+;;   :keymaps 'normal
+;;   "b" 'meghanada-back-jump
+;;   "c" 'meghanada-compile-project
+;;   "o" 'meghanada-optimize-import
+;;   "i" 'meghanada-reference ;; searches for references to symbol at point
+;;   "K" 'meghanada-kill-running-process
+;;   "rd" 'meghanada-debug
+;;   "rr" 'meghanada-run-task
+;;   "trt" 'meghanada-run-junit-test-case
+;;   "trc" 'meghanada-run-junit-class
+;;   "tdc" 'meghanada-debug-junit-class
+;;   "jd" 'meghanada-jump-declaration
+;;   "js" 'meghanada-jump-symbol
+;;   "ts" 'meghanada-switch-testcase
 
-)
+;; )
   ;; meghanada-back-jump is M-,   NOTE: it saves a history, so it works more than once consecutively
+
+(my-leader-eval
+ :keymaps 'normal
+ "b" 'eval-buffer
+ )
 
 
 ;; Help
@@ -193,6 +201,7 @@
   :keymaps 'normal
   "t" 'info 
   )
+
 
 ;; to comment/uncomment use M-;
 
