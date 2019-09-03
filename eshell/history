@@ -1,26 +1,3 @@
-ls
-cd ..
-cd ~/Documents/Projects/androidTracker
-cd Documents
-cd Projects
-ls
-cd trackerAndroid
-ls
-bash gradlew clean
-sudo rm -r app/build 
-ls app
-bash gradlew clean
-bash ~/brunAndroid.sh .
-bash gradlew clean
-ls app
-bash ~/brunAndroid.sh .
-bash gradlew clean
-bash ~/brunAndroid.sh .
-emulator -list-avds
-cd Documents/Projects/trackerAndroid/
-ls
-bash ~/brunAndroid.sh .
-emulator -list-avds
 emulator -avd Nexus8_0
 emulator -avd Nexus8_0 &
 bash ~/brunAndroid.sh .
@@ -126,3 +103,26 @@ git status
 git commit -m "gtags"
 rm .projectile
 touch .projectile
+git status
+git add *
+git stauts
+git status
+git rm workspace/jdt.ls-java-project/
+git rm -r workspace/
+git rm -r elpa/
+git status
+git unstage	new file:   elpa/treemacs-20190826.1125/icons/default/vsc/scss.png
+git rm *
+git status
+find-file .gitignore
+git status
+git rm --cached workspace/
+git rm -r --cached workspace/
+git rm -r --cached elpa//
+git status
+find-file .gitignore
+git status
+git add *
+git status
+git commit -m "eglot auto setup on buffer open"
+git push

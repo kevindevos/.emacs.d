@@ -38,19 +38,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; theme
 (load-theme 'sanityinc-tomorrow-eighties t)
-;overide neotheme font face for files
-;; (defface neo-file-link-face
-;;   '((((background dark)) (:foreground "Black"))
-;;     (t                   (:foreground "Black")))
-;;   "*Face used for open file/dir in neotree buffer."
-;;   :group 'neotree :group 'font-lock-highlighting-faces)
-;; (defvar neo-file-link-face 'neo-file-link-face)
-;; (defface neo-dir-link-face
-;;   '((((background dark)) (:foreground "Dark" :weight bold))
-;;     (t                   (:foreground "Dark" :weight bold)))
-;;   "*Face used for expand sign [+] in neotree buffer."
-;;   :group 'neotree :group 'font-lock-highlighting-faces)
-;; (defvar neo-dir-link-face 'neo-dir-link-face)
 
 ;; telephone line ( power line)
 (require 'telephone-line)
@@ -105,7 +92,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; projectile
 (require 'projectile)
-(projectile-mode)
+(projectile-mode t)
+
 
 ;; swap meta key from option key to the command key 
 (setq mac-option-modifier nil) ;; alt
