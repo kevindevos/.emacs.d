@@ -7,7 +7,10 @@
 (flycheck-gradle-setup)
 
 (require 'eglot)
-(eglot)
+;;(eglot)
+
+(require 'ggtags)
+(ggtags-mode)
 
 ;; (require 'lsp-java)
 ;; (lsp)
@@ -20,5 +23,4 @@
 ;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list) 
 
 ;; (setq lsp-enable-indentation nil)
-;; (setq lsp-java-autobuild-enabled nil)
-(setq company-idle-delay 0.2)
+(setq lsp-java-autobuild-enabled nil)
