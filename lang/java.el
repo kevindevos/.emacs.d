@@ -7,7 +7,11 @@
 (flycheck-gradle-setup)
 
 (require 'eglot)
-;;(eglot)
+;; call eglot if in a java project 
+(if (projectile-project-p)
+    (call-interactively #'eglot)
+
+  )
 
 (require 'ggtags)
 (ggtags-mode)

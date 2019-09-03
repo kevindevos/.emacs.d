@@ -1,61 +1,3 @@
-adb shell
-cd (projectile-project-roo)
-(projectile-project-root)
-cd app/build/outputs
-ls
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd builds
-ls
-cd build/outputs
-ls
-cd apk
-ls
-cd debug
-ls
-cd ~
-ls
-./bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
-sudo ./bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
-sudo bash bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
-sudo bash bash_gradle_compile_run_debug_android.sh ~/Documents/Projects/trackerAndroid
-./brunAndroid 
-sudo bash ./brunAndroid.sh ~/Documents/Projects/trackerAndroid
-adb remove com.example.kevin.tracker
-adb uninstall com.example.kevin.tracker
-sudo bash ./brunAndroid.sh ~/Documents/Projects/trackerAndroid
-cd ~/Documents/Projects/trackerAndroid
-bash gradlew clean
-cd app
-ls
-cd ..
-sudo bash ~/brunAndroid.sh .
-cat ~/brunAndroid.sh
-sudo bash ~/brunAndroid.sh .
-cd app
-ls
-cd ..
-sudo bash ~/brunAndroid.sh .
-cd app
-ls
-cd ..
-cat ~/brunAndroid.sh
-cat ~/brunAndroid.sh
-sudo bash ~/brunAndroid.sh .
-sudo bash ~/brunAndroid.sh .
-sudo chmod 777 ~/brunAndroid.sh 
-ls -l ~ | grep .i android
-ls -l ~ | grep -i android
-ls
-cd app
-ls
-cd ..
-cd gradle
 ls
 cd ..
 cd ~/Documents/Projects/androidTracker
@@ -126,3 +68,61 @@ ls
 ls -la
 vim .gitignore
 ls
+ls
+cat .gitignore 
+ls
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+cd ..
+ls
+cd app
+ls
+cd src/
+ls
+cd main/
+ls
+cd java/com/example/kevin/tracker/
+ls
+ls
+mv javimp ~/javimp
+ls
+cd ~/Documents/Projects/javaShoppingList-master/
+ls
+grep -rnw . -e ".projectile"
+grep -rnw . -e "\\.projectile"
+touch .projectile
+ls
+vim .gitignore
+,s
+ls
+cd src/
+ls
+cd main/java/shopping/
+ls
+ls -l
+ls -la
+ls
+ls -la
+cd src/main/java/shopping/
+ls
+git status
+cd ..
+cd ..
+cd ..
+cd ..
+git status
+git status
+git add init.el
+git add lang/java.el
+git add gtags.el
+git status
+git commit -m "gtags"
+rm .projectile
+touch .projectile

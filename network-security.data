@@ -1,0 +1,3 @@
+(
+ (:id "sha1:6d4eb958390599243ba9f5035cb671fa8dd6a93a" :fingerprints ("sha1:96:05:a1:7e:b9:cb:80:a0:45:2a:ff:29:5b:da:f9:38:80:44:c1:84") :host "elpa.gnu.org:443" :conditions (:renegotiation-info-ext))
+)
