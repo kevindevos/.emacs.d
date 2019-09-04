@@ -10,6 +10,9 @@
 (defconst my-leader-imenu "SPC i")
 (defconst my-leader-help "SPC I")
 (defconst my-leader-eval "SPC e")
+(defconst my-leader-lsp "SPC l")
+(defconst my-leader-search "SPC s")
+(defconst my-leader-flycheck "SPC f")
 
 
 ;; general.el leader key definers
@@ -47,6 +50,14 @@
 (general-create-definer my-leader-eval
   :prefix my-leader-eval)
 
+(general-create-definer my-leader-lsp
+  :prefix my-leader-lsp)
+
+(general-create-definer my-leader-flycheck
+  :prefix my-leader-flycheck)
+
+(general-create-definer my-leader-search 
+  :prefix my-leader-search)
 
 ; evil tweaks
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
@@ -74,7 +85,6 @@
   (define-key neotree-mode-map (kbd "<tab>") 'neotree-stretch-toggle)
   (define-key neotree-mode-map (kbd "RET") 'neotree-enter)
   (define-key neotree-mode-map (kbd "<return>") 'neotree-enter)
-  
   )
 ;; Use C-c C-c in neotree mode to set dir to root dir
 
@@ -158,43 +168,76 @@
  "I" 'projectile-invalidate-cache
  "r" 'helm-projectile-recentf
  "R" 'projectile-remove-known-project
- "sa" 'helm-projectile-ag
+ "sa" 'helm-projectile-ag ;; !
  )
 
 
 
+; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
 (my-leader-imenu-def
   :keymaps 'normal
   "i" 'helm-semantic-or-imenu
+  "a" 'helm-imenu-in-all-buffers
   )
 
-;;;;;;;;;;;;;;; meghanada ;;;;;;;;;;;
-;; (my-leader-meghanada-def
-;;   :keymaps 'normal
-;;   "b" 'meghanada-back-jump
-;;   "c" 'meghanada-compile-project
-;;   "o" 'meghanada-optimize-import
-;;   "i" 'meghanada-reference ;; searches for references to symbol at point
-;;   "K" 'meghanada-kill-running-process
-;;   "rd" 'meghanada-debug
-;;   "rr" 'meghanada-run-task
-;;   "trt" 'meghanada-run-junit-test-case
-;;   "trc" 'meghanada-run-junit-class
-;;   "tdc" 'meghanada-debug-junit-class
-;;   "jd" 'meghanada-jump-declaration
-;;   "js" 'meghanada-jump-symbol
-;;   "ts" 'meghanada-switch-testcase
-
-;; )
-  ;; meghanada-back-jump is M-,   NOTE: it saves a history, so it works more than once consecutively
-
+;;;;;;;;;;;;;;;,,
 (my-leader-eval
  :keymaps 'normal
  "b" 'eval-buffer
  )
 
+(my-leader-flycheck
+  :keymaps 'normal
+  "le" 'flycheck-list-errors
+  "n" 'flycheck-next-error
+  "p" 'flycheck-previous-error
+  "f" 'flycheck-first-error
+  )
 
+(require 'lsp-mode)
+(define-key lsp-mode-map (kbd "C-x m") 'lsp-java-extract-method)
+(my-leader-lsp
+  :keymaps 'normal
+  "d" 'lsp-ui-doc-show
+  "h" 'lsp-ui-doc-hide
+  "i" 'lsp-ui-imenu
+  "oi" 'lsp-java-organize-imports
+  "gi" 'lsp-java-generate-overrides
+  "ts" 'lsp-java-generate-to-string
+  "ec" 'lsp-java-extract-to-constant
+  "fd" 'lsp-find-definition
+  "jb" 'lsp-ui-peek-jump-backward
+  "jf" 'lsp-ui-peek-jump-forward
+  "fl" 'lsp-ui-flycheck-list
+  "fr" 'lsp-ui-peek-find-references
+  "fi" 'lsp-ui-peek-find-implementation
+  )
+
+
+
+;; peek mode keybindings defined already by ls-ui-peek
+;; (define-key map (kbd "M-n") 'lsp-ui-peek--select-next-file)
+;; (define-key map (kbd "<right>") 'lsp-ui-peek--select-next-file)
+;; (define-key map (kbd "M-p") 'lsp-ui-peek--select-prev-file)
+;; (define-key map (kbd "<left>") 'lsp-ui-peek--select-prev-file)
+;; (define-key map (kbd "C-n") 'lsp-ui-peek--select-next)
+;; (define-key map (kbd "n") 'lsp-ui-peek--select-next)
+;; (define-key map (kbd "<down>") 'lsp-ui-peek--select-next)
+;; (define-key map (kbd "C-p") 'lsp-ui-peek--select-prev)
+;; (define-key map (kbd "p") 'lsp-ui-peek--select-prev)
+;; (define-key map (kbd "<up>") 'lsp-ui-peek--select-prev)
+;; (define-key map (kbd "TAB") 'lsp-ui-peek--toggle-file)
+;; (define-key map (kbd "q") 'lsp-ui-peek--abort)
+;; (define-key map (kbd "RET") 'lsp-ui-peek--goto-xref)
+;; (define-key map (kbd "M-RET") 'lsp-ui-peek--goto-xref-other-window)
+
+(my-leader-search
+  :keymaps 'normal
+  "f" 'evil-search-forward
+  "b" 'evil-search-backward
+  "p" 'isearch-forward-symbol-at-point
+  )
 ;; Help
 
 (my-leader-help-def
@@ -216,6 +259,3 @@
 ;; make a word upper case 
 ;; M-u
 
-;; TODO neotree stretch toggle
-;; TODO programming language specific configs 
-;; TODO make tab indent multiple lines that are selected simultaneously
