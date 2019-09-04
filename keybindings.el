@@ -192,7 +192,7 @@
   "le" 'flycheck-list-errors
   "n" 'flycheck-next-error
   "p" 'flycheck-previous-error
-  "f" 'flycheck-first-error
+  "q" 'flycheck-first-error
   )
 
 (require 'lsp-mode)

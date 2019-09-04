@@ -1,24 +1,3 @@
-bash ~/brunAndroid.sh . com.example.kevin.tracker
-ps -ax 
-ps -ax | grep -i projectile
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-cd ..
-adb pull /data/data/com.example.kevin.tracker/databases/TRACKER_DB 
-sudo adb pull /data/data/com.example.kevin.tracker/databases/TRACKER_DB 
-bash ~/brunAndroid.sh . com.example.kevin.tracker
-clear
-ls
-ls -R
-locate RecyclerViewAdapter.java
-git status
-git status
-git add *
 git commit -m "refresh"
 git push
 finder .
@@ -126,3 +105,24 @@ git status
 git add *
 git commit -m "fix eglot session start on visited buffer"
 git push
+cd ~/.emacs.d/
+git stauts
+git status
+find-file .gitignore
+git status 
+git status
+git add *
+git status
+git rm workspace/
+git rm -r workspace/
+git commit -m "lsp and keybindings"
+git push
+git status
+git add *
+git status
+git rm -r workspace/
+git rm -r --cached workspace/
+git status
+git rm --cached elpa
+git rm --cached -r elpa
+find-file .gitignore

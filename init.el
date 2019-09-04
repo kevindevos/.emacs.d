@@ -3,6 +3,11 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+;; use-package
+(eval-when-compile
+  (add-to-list 'load-path "elpa")
+  (require 'use-package))
+
 ;; Garbage Collection higher threshold
 (setq gc-cons-threshold 200000000)
 
@@ -26,6 +31,15 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq initial-buffer-choice (lambda () (get-buffer "*scratch*")))
 (setq initial-scratch-message "")
 
+;; swap meta key from option key to the command key 
+(setq mac-option-modifier nil) ;; alt
+(setq mac-command-modifier 'meta) ;; command
+
+;; define a specific folder for emacs backup files ( backup files are those appended with ~
+(setq backup-directory-alist '("~/.saves"))
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
 ;; general configuration
 (tool-bar-mode -1) ;; disable gui tool bar
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; default emacs to start maximized
@@ -36,27 +50,29 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; disable ring bell sound 
 (setq ring-bell-function 'ignore) 
 
-;; indentation style
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook
-	  (lambda()
-	    (subword-mode)
-	    (google-set-c-style)
-	    (google-make-newline-indent)
-	    (setq c-basic-offset 4)))
-
 ;; theme
 (load-theme 'sanityinc-tomorrow-eighties t) 
 
-;; telephone line ( power line)
-(require 'telephone-line)
-(telephone-line-mode 1)
+;; language config hooks
+(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
+(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
+(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 
-;; open linum-mode for all files
-(global-linum-mode)
+;; telephone line ( power line)
+(use-package telephone-line :ensure t :config (telephone-line-mode 1))
+
+;; display line numbers 
+(setq-default display-line-numbers-type 'visual
+	      display-line-numbers-current-absolute t
+	      display-line-numbers-width 1)
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 ;; set default company backends ( does not include company-eclim company-xcode and some others that were included beforehand
 (use-package company
+  :ensure t
   :config
   (progn
     (setq company-dabbrev-downcase 0)
@@ -68,107 +84,59 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     )
   )
 
+(use-package which-key :ensure t :config (which-key-mode))
+(use-package helm :ensure t :config (global-set-key (kbd "M-x") 'helm-M-x))
+(use-package yasnippet :ensure t :config (yas-global-mode 1))
+(use-package projectile :ensure t :config (projectile-mode t))
+(use-package helm-projectile :ensure t)
+(use-package info :ensure t)
+(use-package general :ensure t :config (load my-keybindings-file-path))
 (use-package evil
-  :config (evil-mode 1)
-  )
-
-(use-package evil-surround
   :ensure t
   :config
-  (global-evil-surround-mode 1))
-;; to delete surrounding is ds<textobject>
+  (progn
+    (evil-mode 1))
+  ;; use evil in *Packages* buffer
+  (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Help*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*info*" . normal))
+)
+(use-package evil-surround :ensure t :config (global-evil-surround-mode 1))
 
-;; use evil in *Packages* buffer
-(add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
-(add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
-(add-to-list 'evil-buffer-regexps '("*Help*" . normal))
-(add-to-list 'evil-buffer-regexps '("*info*" . normal))
-
-
-(require 'which-key)
-(which-key-mode)
-
-(require 'helm-config)
-(global-set-key (kbd "M-x") 'helm-M-x)
-
-;; folding
-(require 'origami)
-(global-origami-mode 1)
-
-;; yasnippets
-(require 'yasnippet)
-(yas-global-mode 1)
-
-;; projectile
-(require 'projectile)
-(projectile-mode t)
-
-
-;; swap meta key from option key to the command key 
-(setq mac-option-modifier nil) ;; alt
-(setq mac-command-modifier 'meta) ;; command
-
-(require 'helm-projectile)
-(require 'info)
-;; general makes it easy to manage keybindings
-(use-package general
-  :config
-  (load my-keybindings-file-path)
-  )
-
-;; define a specific folder for emacs backup files ( backup files are those appended with ~
-(setq backup-directory-alist '("~/.saves"))
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-
-
-;; language specific configuration
-;; java eglot, set classpath before hook
-(require 'eglot)
-(defconst my/eclipse-jdt-home "/Users/kevindevos/Documents/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.5.500.v20190715-1310.jar")
-(defun my/eclipse-jdt-contact (interactive)
-  (let ((cp (getenv "CLASSPATH")))
-    (setenv "CLASSPATH" (concat cp ":" my/eclipse-jdt-home))
-    (unwind-protect
-        (eglot--eclipse-jdt-contact nil)
-      (setenv "CLASSPATH" cp))))
-(setcdr (assq 'java-mode eglot-server-programs) #'my/eclipse-jdt-contact)
 
 (load-file "~/.emacs.d/gtags.el")
-(require 'helm-gtags)
-;; Enable helm-gtags-mode
-(add-hook 'c-mode-hook 'helm-gtags-mode)
-(add-hook 'c++-mode-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
+(use-package helm-gtags
+  :ensure t
+  :config
+  (progn
+    ;; Enable helm-gtags-mode
+    (add-hook 'c-mode-hook 'helm-gtags-mode)
+    (add-hook 'c++-mode-hook 'helm-gtags-mode)
+    (add-hook 'asm-mode-hook 'helm-gtags-mode)
+    ;; Set key bindings
+    (eval-after-load "helm-gtags"
+      '(progn
+	 (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+	 (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+	 (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+	 (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+	 (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+	 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+    )
+  )
 
-;; Set key bindings
-(eval-after-load "helm-gtags"
-  '(progn
-     (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
-     (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-     (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
-     (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
-     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-     (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-     (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+(use-package flycheck :ensure t)
+(use-package flycheck-pos-tip :ensure t :after flycheck :config (flycheck-pos-tip-mode))
 
-(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
-(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
-(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
-(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
-(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
-
-(with-eval-after-load 'flycheck
-  (flycheck-pos-tip-mode))
-
+;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root, using find-file-in-project,
 or the current buffer directory."
   (interactive)
   (let ((project-dir
          (ignore-errors
-           ;;; Pick one: projectile or find-file-in-project
-           ; (projectile-project-root)
            (ffip-project-root)
            ))
         (file-name (buffer-file-name))
@@ -246,7 +214,7 @@ or the current buffer directory."
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
  '(package-selected-packages
-   '(google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
