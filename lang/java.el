@@ -9,10 +9,6 @@
 (require 'lsp-java)
 (lsp)
 
-(defun lsp-java-generate-constructor ()
-  (interactive)
-  (lsp-execute-code-action-by-kind "source.generate.constructor"))
-
 ;; indentation style
 (setq c-basic-offset 4
       tab-width 4
@@ -27,9 +23,6 @@
 (ggtags-mode)
 
 (setq company-backends (delete "company-capf" company-backends))
-
-
-;;;;;
 
 ;; language specific configuration
 ;; java eglot, set classpath before hook

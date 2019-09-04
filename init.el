@@ -50,6 +50,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; disable ring bell sound 
 (setq ring-bell-function 'ignore) 
 
+;; automatically add ending braces like } on open
+(electric-pair-mode)
+
 ;; theme
 (load-theme 'sanityinc-tomorrow-eighties t) 
 
@@ -127,8 +130,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     )
   )
 
-(use-package flycheck :ensure t)
 (use-package flycheck-pos-tip :ensure t :after flycheck :config (flycheck-pos-tip-mode))
+(use-package lsp-ui :ensure t :after lsp-mode)
 
 ;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
@@ -214,7 +217,7 @@ or the current buffer directory."
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
  '(package-selected-packages
-   '(helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
