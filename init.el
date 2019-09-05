@@ -61,13 +61,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; automatically add ending braces like } on open
 (electric-pair-mode)
 
-;; language config hooks
-(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
-(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
-(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
-(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
-(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
-
 ;; light theme
 (use-package twilight-bright-theme :ensure t
   :config
@@ -76,6 +69,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     (require 'color)
     (let ((bg (face-attribute 'default :background)))
       (custom-set-faces
+       `(isearch ((t (:background "DodgerBlue1" :foreground "SlateGray1"))))
+       `(lazy-highlight ((t (:background "LightBlue2" :weight bold))))
        `(company-tooltip ((t (:inherit default :background ,(color-darken-name bg 5)))))
        `(company-scrollbar-bg ((t (:background ,(color-darken-name bg 10)))))
        `(company-scrollbar-fg ((t (:background ,(color-darken-name bg 15)))))
@@ -109,17 +104,55 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     )
   )
 
+;; language config hooks
+(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
+(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
+(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 
 ;; telephone line ( power line)
 (use-package telephone-line :ensure t :config (telephone-line-mode 1))
 
 
 (setq-default display-line-numbers-type 'visual
-	      display-line-numbers-current-absolute t
-	      display-line-numbers-width 1)
+              display-line-numbers-current-absolute t
+              display-line-numbers-width 1)
 (add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
+;; set default company backends ( does not include company-eclim company-xcode and some others that were included beforehand
+(use-package company
+  :ensure t
+  :config
+  (progn
+    (setq company-dabbrev-downcase 0)
+    (setq company-idle-delay 0)
+    (setq company-backends '(company-bbdb company-semantic company-clang company-capf company-keywords
+					  company-files company-dabbrev-code company-gtags company-etags 
+					  company-oddmuse company-dabbrev))
+    (global-company-mode)
+    )
+  )
+
+(use-package which-key :ensure t :config (which-key-mode))
+(use-package helm :ensure t :config (global-set-key (kbd "M-x") 'helm-M-x))
+(use-package yasnippet :ensure t :config (yas-global-mode 1))
+(use-package projectile :ensure t :config (projectile-mode t))
+(use-package helm-projectile :ensure t)
+(use-package info :ensure t)
+(use-package general :ensure t :config (load my-keybindings-file-path))
+(use-package evil
+  :ensure t
+  :config
+  (progn
+    (evil-mode 1))
+  ;; use evil in *Packages* buffer
+  (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Help*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*info*" . normal))
+  )
 (use-package evil-surround :ensure t :config (global-evil-surround-mode 1))
 
 
@@ -162,6 +195,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (setq helm-multi-swoop-edit-save t)
   )
 
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-darken-name bg 5)))))
+   `(company-scrollbar-bg ((t (:background ,(color-darken-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-darken-name bg 15)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
@@ -257,7 +298,6 @@ or the current buffer directory."
  '(sml/active-foreground-color "#424242")
  '(sml/inactive-background-color "#4fa8a8")
  '(sml/inactive-foreground-color "#424242")
- '(telephone-line-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    '((20 . "#d54e53")
@@ -285,10 +325,10 @@ or the current buffer directory."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(lsp-ui-peek-header ((t (:background "dark cyan" :foreground "black"))))
+ '(lsp-ui-sideline-code-action ((t nil))))
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
-
 
 

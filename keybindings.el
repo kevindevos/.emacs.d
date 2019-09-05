@@ -212,6 +212,7 @@
   "r" 'lsp-rename ;; symbol refactor
   "oi" 'lsp-java-organize-imports
   "gi" 'lsp-java-generate-overrides
+  "gc" 'my-lsp-java-generate-constructors
   "ts" 'lsp-java-generate-to-string
   "ec" 'lsp-java-extract-to-constant
   "fd" 'lsp-find-definition
@@ -223,6 +224,10 @@
   )
 ;; helm swoop M-i
 
+(defun my-lsp-java-generate-constructors ()
+  "Generate Constructors.."
+  (interactive)
+  (lsp-execute-code-action-by-kind "source.generate.constructors"))
 
 ;; to indent whole buffer:
 ;; Select whole buffer C-x h
