@@ -152,7 +152,14 @@
  "d" 'kill-this-buffer
  "p" 'previous-buffer
  "n" 'next-buffer
+ "i" 'indent-buffer
  )
+
+(defun indent-buffer ()
+  (interactive)
+  (save-excursion
+    (indent-region (point-min) (point-max) nil))
+  )
 
 ;;;;;;;;;;;;;;;; Projects with projectile package ;;;;;;;;;;;;;;
 
@@ -202,6 +209,7 @@
   "d" 'lsp-ui-doc-show
   "h" 'lsp-ui-doc-hide
   "i" 'lsp-ui-imenu
+  "r" 'lsp-rename ;; symbol refactor
   "oi" 'lsp-java-organize-imports
   "gi" 'lsp-java-generate-overrides
   "ts" 'lsp-java-generate-to-string
