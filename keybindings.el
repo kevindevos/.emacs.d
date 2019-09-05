@@ -58,12 +58,17 @@
 (general-create-definer my-leader-search 
   :prefix my-leader-search)
 
-; evil tweaks
+					; evil tweaks
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
 
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "zO") 'origami-open-all-nodes)
   (define-key evil-motion-state-map (kbd "zC") 'origami-close-all-nodes)
+  )
+
+(with-eval-after-load 'yasnippet
+  (global-set-key (kbd "C-<return>") 'yas-expand)
+  (global-set-key (kbd "C-<tab>") 'yas-expand)
   )
 
 ;; emacs navigation
@@ -102,21 +107,21 @@
 
 ;; "SPC f"
 (my-leader-files-def
- :keymaps 'normal
- "f" 'helm-find-files
- "s" 'save-buffer
- "t" 'neotree-project-dir-toggle
- "r" 'helm-recentf
- "L" 'helm-locate
- "d" 'dired-jump
- )
+  :keymaps 'normal
+  "f" 'helm-find-files
+  "s" 'save-buffer
+  "t" 'neotree-project-dir-toggle
+  "r" 'helm-recentf
+  "L" 'helm-locate
+  "d" 'dired-jump
+  )
 
 ;; todo helm recentfiles like spacemacs
 
 ;; "SPC f e"
 (my-leader-files-edit-def
- :keymaps 'normal
- "d" 'my-open-dotfile
+  :keymaps 'normal
+  "d" 'my-open-dotfile
   )
 
 (defun my-open-dotfile ()
@@ -128,32 +133,32 @@
 
 ;; "SPC w"
 (my-leader-windows-def
- :keymaps 'normal
- "j" 'windmove-down
- "k" 'windmove-up
- "h" 'windmove-left
- "l" 'windmove-right
- "/" 'split-window-horizontally
- "-" 'split-window-vertically
- "d" 'delete-window
- "w" 'ace-window
- )
+  :keymaps 'normal
+  "j" 'windmove-down
+  "k" 'windmove-up
+  "h" 'windmove-left
+  "l" 'windmove-right
+  "/" 'split-window-horizontally
+  "-" 'split-window-vertically
+  "d" 'delete-window
+  "w" 'ace-window
+  )
 
 ;; "SPC F"
 (my-leader-frames-def
- :keymaps 'normal
- "m" 'toggle-frame-maximized
- )
+  :keymaps 'normal
+  "m" 'toggle-frame-maximized
+  )
 
 ;; "SPC b"
 (my-leader-buffers-def
- :keymaps 'normal
- "b" 'helm-buffers-list
- "d" 'kill-this-buffer
- "p" 'previous-buffer
- "n" 'next-buffer
- "i" 'indent-buffer
- )
+  :keymaps 'normal
+  "b" 'helm-buffers-list
+  "d" 'kill-this-buffer
+  "p" 'previous-buffer
+  "n" 'next-buffer
+  "i" 'indent-buffer
+  )
 
 (defun indent-buffer ()
   (interactive)
@@ -165,34 +170,35 @@
 
 ;; SPC p
 (my-leader-projectile-def
- :keymaps 'normal
- "i" 'projectile-project-info
- "f" 'helm-projectile-find-file
- "F" 'helm-projectile-find-file-in-known-projects
- "p" 'helm-projectile-switch-project
- "t" 'neotree-projectile-action 
- "I" 'projectile-invalidate-cache
- "r" 'helm-projectile-recentf
- "R" 'projectile-remove-known-project
- "a" 'helm-projectile-ag ;; !
- "s" 'projectile-save-project-buffers
- "os" 'projectile-run-shell
- )
+  :keymaps 'normal
+  "i" 'projectile-project-info
+  "f" 'helm-projectile-find-file
+  "F" 'helm-projectile-find-file-in-known-projects
+  "p" 'helm-projectile-switch-project
+  "t" 'neotree-projectile-action 
+  "I" 'projectile-invalidate-cache
+  "r" 'helm-projectile-recentf
+  "R" 'projectile-remove-known-project
+  "a" 'helm-projectile-ag ;; !
+  "s" 'projectile-save-project-buffers
+  "os" 'projectile-run-shell
+  )
 
 
-; SPC i
+					; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
 (my-leader-imenu-def
   :keymaps 'normal
   "i" 'helm-semantic-or-imenu
   "a" 'helm-imenu-in-all-buffers
+  "t" 'package-name-for-buffer
   )
 
 ;;;;;;;;;;;;;;;,,
 (my-leader-eval
- :keymaps 'normal
- "b" 'eval-buffer
- )
+  :keymaps 'normal
+  "b" 'eval-buffer
+  )
 
 (my-leader-flycheck
   :keymaps 'normal

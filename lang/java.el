@@ -26,6 +26,18 @@
 
 (set-buffer-file-coding-system 'unix)
 
+(defun package-name-for-buffer ()
+  "Get suitable package for java class."
+  (interactive)
+  (let* ((projectFileName (file-relative-name (buffer-file-name) (projectile-project-root)))
+		 (noPrefix (replace-regexp-in-string "src/main/java/" "" projectFileName))
+		 (noBufferName (replace-regexp-in-string (concat "\/" (buffer-name)) "" noPrefix)))
+	(replace-regexp-in-string "\/" "\." noBufferName)
+	  ))
+
+(replace-regexp-in-string "src\/main\/java/" "" "src/main/java/shopping/view/Main.java")
+(replace-regexp-in-string (concat "\/" "Main.java") "" "shopping/view/Main.java")
+(replace-regexp-in-string "\/" "\." "shopping/view/test1/test2")
 ;; language specific configuration
 ;; java eglot, set classpath before hook
 ;; (require 'eglot)

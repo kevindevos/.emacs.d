@@ -27,6 +27,9 @@
 (string-match-p "\\." ".")
 
 
+(file-relative-name (buffer-file-name) (projectile-project-root))
+
+(buffer-file-name)
 
 
 

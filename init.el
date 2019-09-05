@@ -78,6 +78,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
        `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
        `(company-scrollbar-bg ((t (:background "#ffffffffffff"))))
        `(company-scrollbar-fg ((t (:background "#ffffffffffff"))))
+       `(neo-dir-link-face ((t (:foreground "DodgerBlue3" :weight bold))))
+       `(neo-file-link-face ((t (:foreground "dark cyan"))))
        `(company-tooltip ((t (:inherit default :background "#ffffffffffff"))))
        `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
        `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
@@ -204,26 +206,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
-;; toggle neotree to view the whole project
-(defun neotree-project-dir-toggle ()
-  "Open NeoTree using the project root, using find-file-in-project,
-or the current buffer directory."
-  (interactive)
-  (let ((project-dir
-         (ignore-errors
-           (ffip-project-root)
-           ))
-        (file-name (buffer-file-name))
-        (neo-smart-open t))
-    (if (and (fboundp 'neo-global--window-exists-p)
-             (neo-global--window-exists-p))
-        (neotree-hide)
-      (progn
-        (neotree-show)
-        (if project-dir
-            (neotree-dir project-dir))
-        (if file-name
-            (neotree-find file-name))))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -287,6 +269,8 @@ or the current buffer directory."
  '(lsp-ui-sideline-show-diagnostics t)
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
+ '(neo-theme 'icons)
+ '(neo-window-width 35)
  '(package-selected-packages
    '(rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
@@ -319,16 +303,138 @@ or the current buffer directory."
      (340 . "#e7c547")
      (360 . "#b9ca4a")))
  '(vc-annotate-very-old-color nil)
- '(window-divider-mode nil))
+ '(window-divider-mode nil)
+ '(yas-choose-keys-first t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-scrollbar-bg ((t (:background "#e665e665e665"))))
+ '(company-scrollbar-fg ((t (:background "#d998d998d998"))))
+ '(company-tooltip ((t (:inherit default :background "#f332f332f332"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ '(helm-header ((t (:inherit header-line :background "LightBlue4" :foreground "seashell2"))))
+ '(helm-match ((t (:foreground "LightBlue3" :weight bold))))
+ '(helm-selection ((t (:background "PaleTurquoise" :distant-foreground "black"))))
+ '(helm-source-header ((t (:weight bold :height 1.3 :family "Sans Serif"))))
+ '(isearch ((t (:background "DodgerBlue1" :foreground "SlateGray1"))))
+ '(lazy-highlight ((t (:background "LightBlue2" :weight bold))))
  '(lsp-ui-peek-header ((t (:background "dark cyan" :foreground "black"))))
- '(lsp-ui-sideline-code-action ((t nil))))
+ '(lsp-ui-sideline-code-action ((t nil)))
+ '(magit-diff-added ((t (:foreground "lime green"))))
+ '(magit-diff-added-highlight ((t (:background "PaleGreen1" :foreground "sea green"))))
+ '(magit-diff-base ((t (:foreground "gold3"))))
+ '(magit-diff-context-highlight ((t (:background "gray70" :foreground "gray100"))))
+ '(magit-diff-file-heading-highlight ((t (:inherit magit-diff-file-heading :background "gray85"))))
+ '(magit-diff-hunk-heading ((t (:background "gray90" :foreground "grey70"))))
+ '(magit-diff-hunk-heading-highlight ((t (:background "gray90" :foreground "gray0" :weight bold))))
+ '(magit-diff-hunk-heading-selection ((t (:inherit magit-diff-hunk-heading-highlight :foreground "chocolate3"))))
+ '(magit-diff-lines-heading ((t (:background "wheat1" :foreground "salmon4"))))
+ '(magit-diff-removed ((t (:background "#eecccc" :foreground "#553333"))))
+ '(magit-diff-removed-highlight ((t (:background "#eecccc" :foreground "#553333" :weight bold))))
+ '(magit-diff-whitespace-warning ((t (:background "IndianRed1"))))
+ '(magit-section-highlight ((t (:background "gray90" :foreground "grey20" :weight bold))))
+ '(neo-dir-link-face ((t (:foreground "DodgerBlue3" :weight bold))))
+ '(neo-file-link-face ((t (:foreground "dark cyan"))))
+ '(telephone-line-projectile ((t (:inherit mode-line :foreground "dark cyan" :weight bold)))))
+
+;; toggle neotree to view the whole project
+(defun neotree-project-dir-toggle ()
+  "Open NeoTree using the project root, using find-file-in-project,
+or the current buffer directory."
+  (interactive)
+  (let ((project-dir
+         (ignore-errors
+           (ffip-project-root)
+           ))
+        (file-name (buffer-file-name))
+        (neo-smart-open t))
+    (if (and (fboundp 'neo-global--window-exists-p)
+             (neo-global--window-exists-p))
+        (neotree-hide)
+      (progn
+        (neotree-show)
+        (if project-dir
+            (neotree-dir project-dir))
+        (if file-name
+            (neotree-find file-name))))))
+
+
+;; prefer yasnippet over company expansion
+;; https://emacs.stackexchange.com/questions/7908/how-to-make-yasnippet-and-company-work-nicer
+;; (defun check-expansion ()
+;;   (save-excursion
+;;     (if (looking-at "\\_>") t
+;;       (backward-char 1)
+;;       (if (looking-at "\\.") t
+;;     (backward-char 1)
+;;     (if (looking-at "->") t nil)))))
+
+;; (defun do-yas-expand ()
+;;   (let ((yas/fallback-behavior 'return-nil))
+;;     (yas/expand)))
+
+;; (defun tab-indent-or-complete ()
+;;   (interactive)
+;;   (cond
+;;    ((minibufferp)
+;;     (minibuffer-complete))
+;;    (t
+;;     (indent-for-tab-command)
+;;     (if (or (not yas/minor-mode)
+;;         (null (do-yas-expand)))
+;;     (if (check-expansion)
+;;         (progn
+;;           (company-manual-begin)
+;;           (if (null company-candidates)
+;;           (progn
+;;             (company-abort)
+;;             (indent-for-tab-command)))))))))
+
+;; (defun tab-complete-or-next-field ()
+;;   (interactive)
+;;   (if (or (not yas/minor-mode)
+;;       (null (do-yas-expand)))
+;;       (if company-candidates
+;;       (company-complete-selection)
+;;     (if (check-expansion)
+;;       (progn
+;;         (company-manual-begin)
+;;         (if (null company-candidates)
+;;         (progn
+;;           (company-abort)
+;;           (yas-next-field))))
+;;       (yas-next-field)))))
+
+;; (defun expand-snippet-or-complete-selection ()
+;;   (interactive)
+;;   (if (or (not yas/minor-mode)
+;;       (null (do-yas-expand))
+;;       (company-abort))
+;;       (company-complete-selection)))
+
+;; (defun abort-company-or-yas ()
+;;   (interactive)
+;;   (if (null company-candidates)
+;;       (yas-abort-snippet)
+;;     (company-abort)))
+
+;; (global-set-key [tab] 'tab-indent-or-complete)
+;; (global-set-key (kbd "TAB") 'tab-indent-or-complete)
+;; (global-set-key [(control return)] 'company-complete-common)
+
+;; (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
+;; (define-key company-active-map (kbd "TAB") 'expand-snippet-or-complete-selection)
+
+;; (define-key yas-minor-mode-map [tab] nil)
+;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+
+;; (define-key yas-keymap [tab] 'tab-complete-or-next-field)
+;; (define-key yas-keymap (kbd "TAB") 'tab-complete-or-next-field)
+;; (define-key yas-keymap [(control tab)] 'yas-next-field)
+;; (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
-
-
