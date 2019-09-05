@@ -74,7 +74,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; telephone line ( power line)
 (use-package telephone-line :ensure t :config (telephone-line-mode 1))
 
-;; display line numbers 
+
 (setq-default display-line-numbers-type 'visual
 	      display-line-numbers-current-absolute t
 	      display-line-numbers-width 1)
@@ -154,6 +154,15 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   ;; Save buffer when helm-muti-swoop-edit is complete
   (setq helm-multi-swoop-edit-save t)
 )
+
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+(custom-set-faces
+ `(company-tooltip ((t (:inherit default :background ,(color-darken-name bg 5)))))
+ `(company-scrollbar-bg ((t (:background ,(color-darken-name bg 10)))))
+ `(company-scrollbar-fg ((t (:background ,(color-darken-name bg 15)))))
+ `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+ `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
@@ -239,7 +248,7 @@ or the current buffer directory."
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
  '(package-selected-packages
-   '(twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))

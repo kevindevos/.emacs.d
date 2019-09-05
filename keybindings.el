@@ -169,8 +169,9 @@
  "R" 'projectile-remove-known-project
  "a" 'helm-projectile-ag ;; !
  "s" 'projectile-save-project-buffers
- "rs" 'projectile-run-shell
+ "os" 'projectile-run-shell
  )
+
 
 ; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
