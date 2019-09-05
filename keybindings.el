@@ -14,7 +14,6 @@
 (defconst my-leader-search "SPC s")
 (defconst my-leader-flycheck "SPC f")
 
-
 ;; general.el leader key definers
 
 (general-create-definer my-leader-def
@@ -168,10 +167,10 @@
  "I" 'projectile-invalidate-cache
  "r" 'helm-projectile-recentf
  "R" 'projectile-remove-known-project
- "sa" 'helm-projectile-ag ;; !
+ "a" 'helm-projectile-ag ;; !
+ "s" 'projectile-save-project-buffers
+ "rs" 'projectile-run-shell
  )
-
-
 
 ; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
@@ -213,7 +212,12 @@
   "fr" 'lsp-ui-peek-find-references
   "fi" 'lsp-ui-peek-find-implementation
   )
+;; helm swoop M-i
 
+
+;; to indent whole buffer:
+;; Select whole buffer C-x h
+;; Indent region C-M-\
 
 
 ;; peek mode keybindings defined already by ls-ui-peek

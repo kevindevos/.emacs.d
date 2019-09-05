@@ -24,6 +24,8 @@
 
 (setq company-backends (delete "company-capf" company-backends))
 
+(set-buffer-file-coding-system 'unix)
+
 ;; language specific configuration
 ;; java eglot, set classpath before hook
 ;; (require 'eglot)
@@ -35,3 +37,8 @@
 ;;         (eglot--eclipse-jdt-contact nil)
 ;;       (setenv "CLASSPATH" cp))))
 ;; (setcdr (assq 'java-mode eglot-server-programs) #'my/eclipse-jdt-contact)
+
+;; I now use helm-ag to find all instances of the function name (searches in all files, incl. subdirs, not just in open buffers), and then I use C-c C-e to enter a buffer that lists all the matches and there I change the function name. When I am done I press C-c C-c (helm-ag--edit-commit) to store the changes to all the opened files.
+
+;; This might sound confusing but please see https://github.com/ShingoFukuyama/helm-swoop
+

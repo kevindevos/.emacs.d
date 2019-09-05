@@ -11,8 +11,14 @@
 ;; Garbage Collection higher threshold
 (setq gc-cons-threshold 200000000)
 
+;; macOS titlebar
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+;; no proxy icon
+(setq ns-use-proxy-icon nil)
+
 ;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
+
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
 
 This is particularly useful under Mac OSX, where GUI apps are not started from a shell."
@@ -42,10 +48,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 ;; general configuration
 (tool-bar-mode -1) ;; disable gui tool bar
-(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; default emacs to start maximized
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+(add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers 
 (setq neo-show-hidden-files t) ;; show hidden files in neotree
 (set-face-attribute 'default nil :font "Hack" :height 125) ;; set font size to 12pt , value is 1/10 pt
+(set-default-coding-systems 'unix)
 
 ;; disable ring bell sound 
 (setq ring-bell-function 'ignore) 
@@ -54,7 +62,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (electric-pair-mode)
 
 ;; theme
-(load-theme 'sanityinc-tomorrow-eighties t) 
+(use-package twilight-bright-theme :ensure t :config (load-theme 'twilight-bright t))
 
 ;; language config hooks
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
@@ -132,6 +140,20 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (use-package flycheck-pos-tip :ensure t :after flycheck :config (flycheck-pos-tip-mode))
 (use-package lsp-ui :ensure t :after lsp-mode)
+
+(use-package helm-swoop
+  :ensure t
+  :config
+  (global-set-key (kbd "M-i") 'helm-swoop)
+  (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+  (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+  (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+  ;; hand over the word to helm-swoop when doing isearch
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  ;; Save buffer when helm-muti-swoop-edit is complete
+  (setq helm-multi-swoop-edit-save t)
+)
 
 ;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
@@ -217,7 +239,7 @@ or the current buffer directory."
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
  '(package-selected-packages
-   '(lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
