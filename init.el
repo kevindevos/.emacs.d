@@ -38,6 +38,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; swap meta key from option key to the command key 
 (setq mac-option-modifier nil) ;; alt
 (setq mac-command-modifier 'meta) ;; command
+(if (eq system-type 'darwin)
+    (progn
+      (global-set-key (kbd "M-c") 'evil-yank)
+      (global-set-key (kbd "M-v") 'evil-paste-after)
+      )
+  )
 
 ;; define a specific folder for emacs backup files ( backup files are those appended with ~
 (setq backup-directory-alist '("~/.saves"))
@@ -64,12 +70,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (load-theme 'material t)
   )
 
-;; language config hooks
-(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
-(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
-(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
-(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
-(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 
 ;; telephone line ( power line)
 (use-package telephone-line :ensure t :config (telephone-line-mode 1))
@@ -143,6 +143,16 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (use-package git-gutter :ensure t :config (global-git-gutter+-mode))
 (use-package evil-magit :ensure t :after magit)
 (use-package evil-ediff :ensure t :after ediff)
+(use-package groovy-mode :ensure t) ;; for .gradle files
+
+
+;; language config hooks
+(add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
+(add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
+(add-hook 'java-mode-hook (lambda () (load-file "~/.emacs.d/lang/java.el")))
+(add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
+(add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 
 (use-package helm-swoop
   :ensure t
@@ -182,12 +192,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
    '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".class"))
  '(custom-safe-themes
    '("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "acfac6b14461a344f97fad30e2362c26a3fe56a9f095653832d8fc029cb9d05c" "e396098fd5bef4f0dd6cedd01ea48df1ecb0554d8be0d8a924fb1d926f02f90f" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" default))
-
  '(evil-auto-indent t)
  '(fci-rule-character-color "#d9d9d9")
  '(fci-rule-color "#424242")
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode 'dark)
+ '(gradle-mode t)
  '(grep-find-ignored-files
    '(".#*" "*.o" "*~" "*.bin" "*.lbin" "*.so" "*.a" "*.ln" "*.blg" "*.bbl" "*.elc" "*.lof" "*.glo" "*.idx" "*.lot" "*.fmt" "*.tfm" "*.class" "*.fas" "*.lib" "*.mem" "*.x86f" "*.sparcf" "*.dfsl" "*.pfsl" "*.d64fsl" "*.p64fsl" "*.lx64fsl" "*.lx32fsl" "*.dx64fsl" "*.dx32fsl" "*.fx64fsl" "*.fx32fsl" "*.sx64fsl" "*.sx32fsl" "*.wx64fsl" "*.wx32fsl" "*.fasl" "*.ufsl" "*.fsl" "*.dxl" "*.lo" "*.la" "*.gmo" "*.mo" "*.toc" "*.aux" "*.cp" "*.fn" "*.ky" "*.pg" "*.tp" "*.vr" "*.cps" "*.fns" "*.kys" "*.pgs" "*.tps" "*.vrs" "*.pyc" "*.pyo" "*.class"))
  '(hl-paren-background-colors '("#e8fce8" "#c1e7f8" "#f8e8e8"))
@@ -227,7 +237,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(neo-theme 'ascii)
  '(neo-window-width 35)
  '(package-selected-packages
-   '(evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
