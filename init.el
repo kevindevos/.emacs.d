@@ -16,6 +16,9 @@
 ;; no proxy icon
 (setq ns-use-proxy-icon nil)
 
+;; disable company-mode for eshell only
+(setq company-global-modes '(not eshell-mode))
+
 ;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -144,10 +147,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (use-package evil-magit :ensure t :after magit)
 (use-package evil-ediff :ensure t :after ediff)
 (use-package groovy-mode :ensure t) ;; for .gradle files
-
+(use-package python-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+  (add-hook 'python-mode-hook (lambda () (load-file "~/.emacs.d/lang/python.el"))))
 
 ;; language config hooks
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" , c++-mode) '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode) '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
@@ -239,7 +246,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(neo-theme 'ascii)
  '(neo-window-width 35)
  '(package-selected-packages
-   '(lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
