@@ -5,6 +5,7 @@
 (defconst my-leader-windows "SPC w")
 (defconst my-leader-buffers "SPC b")
 (defconst my-leader-files "SPC f")
+(defconst my-leader-git "SPC g")
 (defconst my-leader-files-edit "SPC f e")
 (defconst my-leader-projectile "SPC p")
 (defconst my-leader-imenu "SPC i")
@@ -58,7 +59,9 @@
 (general-create-definer my-leader-search 
   :prefix my-leader-search)
 
-					; evil tweaks
+(general-create-definer my-leader-git
+  :prefix my-leader-git)
+
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
 
 (with-eval-after-load 'evil-maps
@@ -80,6 +83,17 @@
 ;; magit enforce keybinding wtheck?
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; emacs window resize
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+(require 'dired)
+(global-set-key (kbd "C-x C-j") 'dired-current-directory)
+(define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file)
+(define-key dired-mode-map (kbd "-") 'dired-create-empty-file)
+
 ;; neotree
 (use-package neotree
   :config
@@ -100,8 +114,6 @@
   "e" 'eshell
   "z" 'suspend-emacs
   )
-
-;; restart emacs within emacs: https://emacs.stackexchange.com/questions/5428/restart-emacs-from-within-emacs
 
 ;;;;;;;;;;;;;;;;;;; FILES ;;;;;;;;;;;;;;;;;;;
 
@@ -234,6 +246,12 @@
   "Generate Constructors.."
   (interactive)
   (lsp-execute-code-action-by-kind "source.generate.constructors"))
+
+(my-leader-git
+  :keymaps 'normal
+  "s" 'magit-status
+  "b" 'magit-blame
+  )
 
 ;; to indent whole buffer:
 ;; Select whole buffer C-x h

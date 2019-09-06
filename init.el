@@ -18,9 +18,7 @@
 
 ;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
-
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
-
 This is particularly useful under Mac OSX, where GUI apps are not started from a shell."
   (interactive)
   (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
@@ -61,49 +59,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; automatically add ending braces like } on open
 (electric-pair-mode)
 
-;; light theme
-(use-package twilight-bright-theme :ensure t
+(use-package material-theme :ensure t
   :config
-  (progn
-    (load-theme 'twilight-bright t)
-    (require 'color)
-    (let ((bg (face-attribute 'default :background)))
-      (custom-set-faces
-       `(isearch ((t (:background "DodgerBlue1" :foreground "SlateGray1"))))
-       `(lazy-highlight ((t (:background "LightBlue2" :weight bold))))
-       `(company-tooltip ((t (:inherit default :background ,(color-darken-name bg 5)))))
-       `(company-scrollbar-bg ((t (:background ,(color-darken-name bg 10)))))
-       `(company-scrollbar-fg ((t (:background ,(color-darken-name bg 15)))))
-       `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-       `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-       `(company-scrollbar-bg ((t (:background "#ffffffffffff"))))
-       `(company-scrollbar-fg ((t (:background "#ffffffffffff"))))
-       `(neo-dir-link-face ((t (:foreground "DodgerBlue3" :weight bold))))
-       `(neo-file-link-face ((t (:foreground "dark cyan"))))
-       `(company-tooltip ((t (:inherit default :background "#ffffffffffff"))))
-       `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
-       `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-       `(helm-header ((t (:inherit header-line :background "LightBlue4" :foreground "seashell2"))))
-       `(helm-match ((t (:foreground "LightBlue3" :weight bold))))
-       `(helm-selection ((t (:background "PaleTurquoise" :distant-foreground "black"))))
-       `(helm-source-header ((t (:weight bold :height 1.3 :family "Sans Serif"))))
-       `(lsp-ui-peek-header ((t (:background "dark cyan" :foreground "black"))))
-       `(lsp-ui-sideline-code-action ((t nil)))
-       `(telephone-line-projectile ((t (:inherit mode-line :foreground "dark cyan" :weight bold))))
-       `(magit-diff-added ((t (:foreground "lime green"))))
-       `(magit-diff-added-highlight ((t (:background "PaleGreen1" :foreground "sea green"))))
-       `(magit-diff-base ((t (:foreground "gold3"))))
-       `(magit-diff-context-highlight ((t (:background "gray70" :foreground "gray100"))))
-       `(magit-diff-file-heading-highlight ((t (:inherit magit-diff-file-heading :background "gray85"))))
-       `(magit-diff-hunk-heading ((t (:background "gray90" :foreground "grey70"))))
-       `(magit-diff-hunk-heading-highlight ((t (:background "gray90" :foreground "gray0" :weight bold))))
-       `(magit-diff-hunk-heading-selection ((t (:inherit magit-diff-hunk-heading-highlight :foreground "chocolate3"))))
-       `(magit-diff-lines-heading ((t (:background "wheat1" :foreground "salmon4"))))
-       `(magit-diff-removed ((t (:background "#eecccc" :foreground "#553333"))))
-       `(magit-diff-removed-highlight ((t (:background "#eecccc" :foreground "#553333" :weight bold))))
-       `(magit-diff-whitespace-warning ((t (:background "IndianRed1"))))
-       `(magit-section-highlight ((t (:background "gray90" :foreground "grey20" :weight bold))))))
-    )
+  (load-theme 'material t)
   )
 
 ;; language config hooks
@@ -182,6 +140,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (use-package flycheck-pos-tip :ensure t :after flycheck :config (flycheck-pos-tip-mode))
 (use-package lsp-ui :ensure t :after lsp-mode)
+(use-package git-gutter :ensure t :config (global-git-gutter+-mode))
+(use-package evil-magit :ensure t :after magit)
+(use-package evil-ediff :ensure t :after ediff)
 
 (use-package helm-swoop
   :ensure t
@@ -197,16 +158,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (setq helm-multi-swoop-edit-save t)
   )
 
-(require 'color)
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-darken-name bg 5)))))
-   `(company-scrollbar-bg ((t (:background ,(color-darken-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-darken-name bg 15)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -216,6 +167,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#000000" "#d54e53" "#b9ca4a" "#e7c547" "#7aa6da" "#c397d8" "#70c0b1" "#eaeaea"))
+ '(ansi-term-color-vector
+   [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
  '(beacon-color "#d54e53")
  '(c-label-minimum-indentation 'set-from-style)
  '(c-syntactic-indentation t)
@@ -228,9 +181,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(completion-ignored-extensions
    '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".class"))
  '(custom-safe-themes
-   '("fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "acfac6b14461a344f97fad30e2362c26a3fe56a9f095653832d8fc029cb9d05c" "e396098fd5bef4f0dd6cedd01ea48df1ecb0554d8be0d8a924fb1d926f02f90f" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" default))
- '(electric-indent-mode t)
+   '("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "acfac6b14461a344f97fad30e2362c26a3fe56a9f095653832d8fc029cb9d05c" "e396098fd5bef4f0dd6cedd01ea48df1ecb0554d8be0d8a924fb1d926f02f90f" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" default))
+
  '(evil-auto-indent t)
+ '(fci-rule-character-color "#d9d9d9")
  '(fci-rule-color "#424242")
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(frame-background-mode 'dark)
@@ -269,10 +223,11 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(lsp-ui-sideline-show-diagnostics t)
  '(lsp-ui-sideline-show-hover nil)
  '(lsp-ui-sideline-show-symbol nil)
- '(neo-theme 'icons)
+ '(neo-show-hidden-files t)
+ '(neo-theme 'ascii)
  '(neo-window-width 35)
  '(package-selected-packages
-   '(rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
@@ -310,36 +265,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "#e665e665e665"))))
- '(company-scrollbar-fg ((t (:background "#d998d998d998"))))
- '(company-tooltip ((t (:inherit default :background "#f332f332f332"))))
- '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
- '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
- '(helm-header ((t (:inherit header-line :background "LightBlue4" :foreground "seashell2"))))
- '(helm-match ((t (:foreground "LightBlue3" :weight bold))))
- '(helm-selection ((t (:background "PaleTurquoise" :distant-foreground "black"))))
- '(helm-source-header ((t (:weight bold :height 1.3 :family "Sans Serif"))))
- '(isearch ((t (:background "DodgerBlue1" :foreground "SlateGray1"))))
- '(lazy-highlight ((t (:background "LightBlue2" :weight bold))))
- '(lsp-ui-peek-header ((t (:background "dark cyan" :foreground "black"))))
- '(lsp-ui-sideline-code-action ((t nil)))
- '(magit-diff-added ((t (:foreground "lime green"))))
- '(magit-diff-added-highlight ((t (:background "PaleGreen1" :foreground "sea green"))))
- '(magit-diff-base ((t (:foreground "gold3"))))
- '(magit-diff-context-highlight ((t (:background "gray70" :foreground "gray100"))))
- '(magit-diff-file-heading-highlight ((t (:inherit magit-diff-file-heading :background "gray85"))))
- '(magit-diff-hunk-heading ((t (:background "gray90" :foreground "grey70"))))
- '(magit-diff-hunk-heading-highlight ((t (:background "gray90" :foreground "gray0" :weight bold))))
- '(magit-diff-hunk-heading-selection ((t (:inherit magit-diff-hunk-heading-highlight :foreground "chocolate3"))))
- '(magit-diff-lines-heading ((t (:background "wheat1" :foreground "salmon4"))))
- '(magit-diff-removed ((t (:background "#eecccc" :foreground "#553333"))))
- '(magit-diff-removed-highlight ((t (:background "#eecccc" :foreground "#553333" :weight bold))))
- '(magit-diff-whitespace-warning ((t (:background "IndianRed1"))))
- '(magit-section-highlight ((t (:background "gray90" :foreground "grey20" :weight bold))))
- '(neo-dir-link-face ((t (:foreground "DodgerBlue3" :weight bold))))
- '(neo-file-link-face ((t (:foreground "dark cyan"))))
- '(telephone-line-projectile ((t (:inherit mode-line :foreground "dark cyan" :weight bold)))))
+ )
 
+(require 'neotree)
 ;; toggle neotree to view the whole project
 (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root, using find-file-in-project,
@@ -359,82 +287,11 @@ or the current buffer directory."
         (if project-dir
             (neotree-dir project-dir))
         (if file-name
-            (neotree-find file-name))))))
+            (company-abort)
+          (indent-for-tab-command))))))
 
-
-;; prefer yasnippet over company expansion
-;; https://emacs.stackexchange.com/questions/7908/how-to-make-yasnippet-and-company-work-nicer
-;; (defun check-expansion ()
-;;   (save-excursion
-;;     (if (looking-at "\\_>") t
-;;       (backward-char 1)
-;;       (if (looking-at "\\.") t
-;;     (backward-char 1)
-;;     (if (looking-at "->") t nil)))))
-
-;; (defun do-yas-expand ()
-;;   (let ((yas/fallback-behavior 'return-nil))
-;;     (yas/expand)))
-
-;; (defun tab-indent-or-complete ()
-;;   (interactive)
-;;   (cond
-;;    ((minibufferp)
-;;     (minibuffer-complete))
-;;    (t
-;;     (indent-for-tab-command)
-;;     (if (or (not yas/minor-mode)
-;;         (null (do-yas-expand)))
-;;     (if (check-expansion)
-;;         (progn
-;;           (company-manual-begin)
-;;           (if (null company-candidates)
-;;           (progn
-;;             (company-abort)
-;;             (indent-for-tab-command)))))))))
-
-;; (defun tab-complete-or-next-field ()
-;;   (interactive)
-;;   (if (or (not yas/minor-mode)
-;;       (null (do-yas-expand)))
-;;       (if company-candidates
-;;       (company-complete-selection)
-;;     (if (check-expansion)
-;;       (progn
-;;         (company-manual-begin)
-;;         (if (null company-candidates)
-;;         (progn
-;;           (company-abort)
-;;           (yas-next-field))))
-;;       (yas-next-field)))))
-
-;; (defun expand-snippet-or-complete-selection ()
-;;   (interactive)
-;;   (if (or (not yas/minor-mode)
-;;       (null (do-yas-expand))
-;;       (company-abort))
-;;       (company-complete-selection)))
-
-;; (defun abort-company-or-yas ()
-;;   (interactive)
-;;   (if (null company-candidates)
-;;       (yas-abort-snippet)
-;;     (company-abort)))
-
-;; (global-set-key [tab] 'tab-indent-or-complete)
-;; (global-set-key (kbd "TAB") 'tab-indent-or-complete)
-;; (global-set-key [(control return)] 'company-complete-common)
-
-;; (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
-;; (define-key company-active-map (kbd "TAB") 'expand-snippet-or-complete-selection)
-
-;; (define-key yas-minor-mode-map [tab] nil)
-;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-
-;; (define-key yas-keymap [tab] 'tab-complete-or-next-field)
-;; (define-key yas-keymap (kbd "TAB") 'tab-complete-or-next-field)
-;; (define-key yas-keymap [(control tab)] 'yas-next-field)
-;; (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
+;; allow usage of dired-find-alternate-file without warning
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
