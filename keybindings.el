@@ -1,6 +1,7 @@
 ;; my general.el keybindings
 (defconst my-leader "SPC")
 (defconst my-leader-emacs "SPC q")
+(defconst my-leader-emacs-theme "SPC q t")
 (defconst my-leader-frames "SPC F")
 (defconst my-leader-windows "SPC w")
 (defconst my-leader-buffers "SPC b")
@@ -22,6 +23,9 @@
 
 (general-create-definer my-leader-emacs-def
   :prefix my-leader-emacs)
+
+(general-create-definer my-leader-emacs-theme
+  :prefix my-leader-emacs-theme)
 
 (general-create-definer my-leader-files-def
   :prefix my-leader-files)
@@ -112,6 +116,12 @@
   "z" 'suspend-emacs
   )
 
+(require 'material-theme)
+(my-leader-emacs-theme
+ :keymaps 'normal
+ "l" (lambda () (interactive) (load-theme 'material-light))
+ "d" (lambda () (interactive) (load-theme 'material))
+ )
 ;;;;;;;;;;;;;;;;;;; FILES ;;;;;;;;;;;;;;;;;;;
 
 ;; "SPC f"
