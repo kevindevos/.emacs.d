@@ -78,10 +78,7 @@
 (global-set-key (kbd "C-d") '(evil-scroll-down 0))
 (global-unset-key (kbd "C-u"))
 (global-set-key (kbd "C-u") (lambda () (interactive) (evil-scroll-up 0)))
-(global-set-key (kbd "<escape>")      'keyboard-escape-quit)
-
-;; magit enforce keybinding wtheck?
-(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; emacs window resize
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
