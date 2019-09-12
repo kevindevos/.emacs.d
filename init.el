@@ -143,8 +143,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (use-package flycheck-pos-tip :ensure t :after flycheck :config (flycheck-pos-tip-mode))
 (use-package lsp-ui :ensure t :after lsp-mode)
-(use-package git-gutter :ensure t :config (global-git-gutter+-mode))
-(use-package evil-magit :ensure t :after magit)
+(use-package git-gutter :ensure t :config (global-git-gutter-mode))
+(use-package evil-magit :ensure t :after magit
+  :config
+  ;; Refresh git gutter on all buffers when staging/unstaging
+  (add-hook 'magit-post-refresh-hook
+            #'git-gutter:update-all-windows)
+  )
+
 (use-package evil-ediff :ensure t :after ediff)
 (use-package groovy-mode :ensure t) ;; for .gradle files
 (use-package python-mode
