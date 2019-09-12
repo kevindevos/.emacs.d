@@ -1,7 +1,9 @@
 (require 'flycheck)
 (flycheck-mode)
 
-(use-package lsp-mode :ensure t
-  :init
+(require 'lsp-mode)
+(use-package lsp-python-ms :ensure t
+  :config
   (lsp))
 
+(eldoc-mode)
