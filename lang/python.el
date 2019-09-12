@@ -5,5 +5,3 @@
 (use-package lsp-python-ms :ensure t
   :config
   (lsp))
-
-(eldoc-mode)

@@ -13,6 +13,7 @@
 
 ;; macOS titlebar
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+
 ;; no proxy icon
 (setq ns-use-proxy-icon nil)
 
@@ -252,7 +253,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(neo-theme 'ascii)
  '(neo-window-width 35)
  '(package-selected-packages
-   '(lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet git-gutter+ company neotree projectile magit general helm evil use-package))
+   '(lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode twilight-bright-theme wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle"))
@@ -317,6 +318,9 @@ or the current buffer directory."
 
 ;; allow usage of dired-find-alternate-file without warning
 (put 'dired-find-alternate-file 'disabled nil)
+
+;; Disable eldoc-mode globally
+(global-eldoc-mode -1)
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
