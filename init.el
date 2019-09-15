@@ -31,6 +31,23 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (set-exec-path-from-shell-PATH)
 
+(setq evil-want-keybinding 'nil)
+(use-package evil
+  :ensure t
+  :config
+  (progn
+    (evil-mode 1))
+  ;; use evil in *Packages* buffer
+  (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*Help*" . normal))
+  (add-to-list 'evil-buffer-regexps '("*info*" . normal))
+  (use-package evil-collection :ensure t
+    :init
+    (evil-collection-init))
+  )
+(use-package evil-surround :ensure t :config (global-evil-surround-mode 1))
+
 ;; constants 
 (defconst my-dotfile-path "~/.emacs.d/init.el")
 (defconst my-keybindings-file-path "~/.emacs.d/keybindings.el")
@@ -106,18 +123,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (use-package helm-projectile :ensure t)
 (use-package info :ensure t)
 (use-package general :ensure t :config (load my-keybindings-file-path))
-(use-package evil
-  :ensure t
-  :config
-  (progn
-    (evil-mode 1))
-  ;; use evil in *Packages* buffer
-  (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
-  (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
-  (add-to-list 'evil-buffer-regexps '("*Help*" . normal))
-  (add-to-list 'evil-buffer-regexps '("*info*" . normal))
-  )
-(use-package evil-surround :ensure t :config (global-evil-surround-mode 1))
 
 
 (load-file "~/.emacs.d/gtags.el")
