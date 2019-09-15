@@ -157,6 +157,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
             #'git-gutter:update-all-windows)
   )
 
+(with-eval-after-load "flycheck"
+    (setq flycheck-clang-warnings `(,@flycheck-clang-warnings
+                                    "no-pragma-once-outside-header")))
+
 (use-package evil-ediff :ensure t :after ediff)
 (use-package groovy-mode :ensure t) ;; for .gradle files
 (use-package python-mode
