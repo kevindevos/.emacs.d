@@ -14,7 +14,7 @@
 (defconst my-leader-eval "SPC e")
 (defconst my-leader-lsp "SPC l")
 (defconst my-leader-search "SPC s")
-(defconst my-leader-flycheck "SPC f")
+(defconst my-leader-flycheck "SPC y")
 
 ;; general.el leader key definers
 
@@ -24,47 +24,107 @@
 (general-create-definer my-leader-emacs-def
   :prefix my-leader-emacs)
 
+(which-key-add-key-based-replacements
+   my-leader-emacs
+   "emacs")
+
 (general-create-definer my-leader-emacs-theme
   :prefix my-leader-emacs-theme)
+
+(which-key-add-key-based-replacements
+   my-leader-emacs-theme
+   "themes")
 
 (general-create-definer my-leader-files-def
   :prefix my-leader-files)
 
+(which-key-add-key-based-replacements
+   my-leader-files
+   "files")
+
 (general-create-definer my-leader-files-edit-def
   :prefix my-leader-files-edit)
+
+(which-key-add-key-based-replacements
+   my-leader-files-edit
+   "files")
 
 (general-create-definer my-leader-windows-def
   :prefix my-leader-windows)
 
+(which-key-add-key-based-replacements
+   my-leader-windows
+   "windows")
+
 (general-create-definer my-leader-frames-def
   :prefix my-leader-frames)
+
+(which-key-add-key-based-replacements
+   my-leader-frames
+   "frames")
 
 (general-create-definer my-leader-buffers-def
   :prefix my-leader-buffers)
 
+(which-key-add-key-based-replacements
+   my-leader-buffers
+   "buffers")
+
 (general-create-definer my-leader-projectile-def
   :prefix my-leader-projectile)
+
+(which-key-add-key-based-replacements
+   my-leader-projectile
+   "projectile")
 
 (general-create-definer my-leader-imenu-def
   :prefix my-leader-imenu)
 
+(which-key-add-key-based-replacements
+   my-leader-imenu
+   "imenu")
+
 (general-create-definer my-leader-help-def
   :prefix my-leader-help)
+
+(which-key-add-key-based-replacements
+   my-leader-help
+   "help")
 
 (general-create-definer my-leader-eval
   :prefix my-leader-eval)
 
+(which-key-add-key-based-replacements
+   my-leader-eval
+   "eval")
+
 (general-create-definer my-leader-lsp
   :prefix my-leader-lsp)
+
+(which-key-add-key-based-replacements
+   my-leader-lsp
+   "lsp")
 
 (general-create-definer my-leader-flycheck
   :prefix my-leader-flycheck)
 
+(which-key-add-key-based-replacements
+   my-leader-flycheck
+   "flycheck")
+
 (general-create-definer my-leader-search 
   :prefix my-leader-search)
 
+(which-key-add-key-based-replacements
+   my-leader-search
+   "search")
+
 (general-create-definer my-leader-git
   :prefix my-leader-git)
+
+(which-key-add-key-based-replacements
+   my-leader-git
+   "git")
 
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
 
@@ -204,6 +264,10 @@
   )
 
 
+(which-key-add-key-based-replacements
+   "SPC p o"
+   "shell")
+
 					; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
 (my-leader-imenu-def
@@ -238,15 +302,44 @@
   "oi" 'lsp-java-organize-imports
   "gi" 'lsp-java-generate-overrides
   "gc" 'my-lsp-java-generate-constructors
-  "ts" 'lsp-java-generate-to-string
-  "ec" 'lsp-java-extract-to-constant
+  "gs" 'lsp-java-generate-to-string
+  "ec" 'lsp-java-extract-to-constant 
   "fd" 'lsp-find-definition
-  "jb" 'lsp-ui-peek-jump-backward
-  "jf" 'lsp-ui-peek-jump-forward
-  "fl" 'lsp-ui-flycheck-list
-  "fr" 'lsp-ui-peek-find-references
-  "fi" 'lsp-ui-peek-find-implementation
+  "pb" 'lsp-ui-peek-jump-backward
+  "pf" 'lsp-ui-peek-jump-forward
+  "pr" 'lsp-ui-peek-find-references
+  "pi" 'lsp-ui-peek-find-implementation
+  "yl" 'lsp-ui-flycheck-list
   )
+
+
+(which-key-add-key-based-replacements
+   "SPC l o"
+   "organize")
+
+
+(which-key-add-key-based-replacements
+   "SPC l g"
+   "generate")
+
+
+(which-key-add-key-based-replacements
+   "SPC l e"
+   "extract")
+
+(which-key-add-key-based-replacements
+   "SPC l f"
+   "find")
+
+(which-key-add-key-based-replacements
+   "SPC l p"
+   "peek")
+
+
+(which-key-add-key-based-replacements
+   "SPC l y"
+   "flycheck")
+
 ;; helm swoop M-i
 
 (defun my-lsp-java-generate-constructors ()
@@ -307,4 +400,3 @@
 
 ;; make a word upper case 
 ;; M-u
-
