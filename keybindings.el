@@ -18,113 +18,38 @@
 
 ;; general.el leader key definers
 
-(general-create-definer my-leader-def
-  :prefix my-leader)
+(general-create-definer my-leader-def :prefix my-leader)
+(general-create-definer my-leader-emacs-def :prefix my-leader-emacs)
+(general-create-definer my-leader-emacs-theme :prefix my-leader-emacs-theme)
+(general-create-definer my-leader-files-def :prefix my-leader-files)
+(general-create-definer my-leader-files-edit-def :prefix my-leader-files-edit)
+(general-create-definer my-leader-windows-def :prefix my-leader-windows)
+(general-create-definer my-leader-frames-def :prefix my-leader-frames)
+(general-create-definer my-leader-buffers-def :prefix my-leader-buffers)
+(general-create-definer my-leader-projectile-def :prefix my-leader-projectile)
+(general-create-definer my-leader-imenu-def :prefix my-leader-imenu)
+(general-create-definer my-leader-help-def :prefix my-leader-help)
+(general-create-definer my-leader-eval :prefix my-leader-eval)
+(general-create-definer my-leader-lsp :prefix my-leader-lsp)
+(general-create-definer my-leader-flycheck :prefix my-leader-flycheck)
+(general-create-definer my-leader-search  :prefix my-leader-search)
+(general-create-definer my-leader-git :prefix my-leader-git)
 
-(general-create-definer my-leader-emacs-def
-  :prefix my-leader-emacs)
-
-(which-key-add-key-based-replacements
-   my-leader-emacs
-   "emacs")
-
-(general-create-definer my-leader-emacs-theme
-  :prefix my-leader-emacs-theme)
-
-(which-key-add-key-based-replacements
-   my-leader-emacs-theme
-   "themes")
-
-(general-create-definer my-leader-files-def
-  :prefix my-leader-files)
-
-(which-key-add-key-based-replacements
-   my-leader-files
-   "files")
-
-(general-create-definer my-leader-files-edit-def
-  :prefix my-leader-files-edit)
-
-(which-key-add-key-based-replacements
-   my-leader-files-edit
-   "files")
-
-(general-create-definer my-leader-windows-def
-  :prefix my-leader-windows)
-
-(which-key-add-key-based-replacements
-   my-leader-windows
-   "windows")
-
-(general-create-definer my-leader-frames-def
-  :prefix my-leader-frames)
-
-(which-key-add-key-based-replacements
-   my-leader-frames
-   "frames")
-
-(general-create-definer my-leader-buffers-def
-  :prefix my-leader-buffers)
-
-(which-key-add-key-based-replacements
-   my-leader-buffers
-   "buffers")
-
-(general-create-definer my-leader-projectile-def
-  :prefix my-leader-projectile)
-
-(which-key-add-key-based-replacements
-   my-leader-projectile
-   "projectile")
-
-(general-create-definer my-leader-imenu-def
-  :prefix my-leader-imenu)
-
-(which-key-add-key-based-replacements
-   my-leader-imenu
-   "imenu")
-
-(general-create-definer my-leader-help-def
-  :prefix my-leader-help)
-
-(which-key-add-key-based-replacements
-   my-leader-help
-   "help")
-
-(general-create-definer my-leader-eval
-  :prefix my-leader-eval)
-
-(which-key-add-key-based-replacements
-   my-leader-eval
-   "eval")
-
-(general-create-definer my-leader-lsp
-  :prefix my-leader-lsp)
-
-(which-key-add-key-based-replacements
-   my-leader-lsp
-   "lsp")
-
-(general-create-definer my-leader-flycheck
-  :prefix my-leader-flycheck)
-
-(which-key-add-key-based-replacements
-   my-leader-flycheck
-   "flycheck")
-
-(general-create-definer my-leader-search 
-  :prefix my-leader-search)
-
-(which-key-add-key-based-replacements
-   my-leader-search
-   "search")
-
-(general-create-definer my-leader-git
-  :prefix my-leader-git)
-
-(which-key-add-key-based-replacements
-   my-leader-git
-   "git")
+(which-key-add-key-based-replacements my-leader-emacs "emacs")
+(which-key-add-key-based-replacements my-leader-emacs-theme "themes")
+(which-key-add-key-based-replacements my-leader-files "files")
+(which-key-add-key-based-replacements my-leader-files-edit "files")
+(which-key-add-key-based-replacements my-leader-windows "windows")
+(which-key-add-key-based-replacements my-leader-frames "frames")
+(which-key-add-key-based-replacements my-leader-buffers "buffers")
+(which-key-add-key-based-replacements my-leader-projectile "projectile")
+(which-key-add-key-based-replacements my-leader-imenu "imenu")
+(which-key-add-key-based-replacements my-leader-help "help")
+(which-key-add-key-based-replacements my-leader-eval "eval")
+(which-key-add-key-based-replacements my-leader-lsp "lsp")
+(which-key-add-key-based-replacements my-leader-flycheck "flycheck")
+(which-key-add-key-based-replacements my-leader-search "search")
+(which-key-add-key-based-replacements my-leader-git "git")
 
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
 
