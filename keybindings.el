@@ -50,6 +50,13 @@
 (which-key-add-key-based-replacements my-leader-flycheck "flycheck")
 (which-key-add-key-based-replacements my-leader-search "search")
 (which-key-add-key-based-replacements my-leader-git "git")
+(which-key-add-key-based-replacements "SPC l o" "organize")
+(which-key-add-key-based-replacements "SPC l g" "generate")
+(which-key-add-key-based-replacements "SPC l e" "extract")
+(which-key-add-key-based-replacements "SPC l f" "find")
+(which-key-add-key-based-replacements "SPC l p" "peek")
+(which-key-add-key-based-replacements "SPC l y" "flycheck")
+(which-key-add-key-based-replacements "SPC p o" "shell")
 
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
 
@@ -189,11 +196,6 @@
   )
 
 
-(which-key-add-key-based-replacements
-   "SPC p o"
-   "shell")
-
-					; SPC i
 ;;;;;;;;;;;;;;;;; imenu ;;;;;;;;;;;;;;;;
 (my-leader-imenu-def
   :keymaps 'normal
@@ -236,34 +238,6 @@
   "pi" 'lsp-ui-peek-find-implementation
   "yl" 'lsp-ui-flycheck-list
   )
-
-
-(which-key-add-key-based-replacements
-   "SPC l o"
-   "organize")
-
-
-(which-key-add-key-based-replacements
-   "SPC l g"
-   "generate")
-
-
-(which-key-add-key-based-replacements
-   "SPC l e"
-   "extract")
-
-(which-key-add-key-based-replacements
-   "SPC l f"
-   "find")
-
-(which-key-add-key-based-replacements
-   "SPC l p"
-   "peek")
-
-
-(which-key-add-key-based-replacements
-   "SPC l y"
-   "flycheck")
 
 ;; helm swoop M-i
 
