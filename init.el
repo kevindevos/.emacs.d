@@ -390,7 +390,11 @@ or the current buffer directory."
 ;; Disable eldoc-mode globally
 (global-eldoc-mode -1)
 
+;; force off debug on error 
 (setq debug-on-error nil)
+
+;; remove dabbrev backend to prevent autocompletion in comments
+(setq company-backends (delete 'company-dabbrev company-backends))
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
