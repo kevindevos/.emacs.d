@@ -1,9 +1,9 @@
 (require 'flycheck)
 (use-package flycheck :ensure t
   :config
-  (flymake-mode-off)
   (flycheck-mode t)
-  (setq flycheck-clang-include-path (list "/Applications/JUCE/modules/"))
+  (setq flycheck-clang-include-path (list "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include"))
+  (setq flycheck-clang-standard-library "libc++")
   )
 
 (set-buffer-file-coding-system 'unix)
@@ -15,3 +15,6 @@
 (use-package lsp-mode :ensure t
   :config
   (lsp))
+
+;; Disable flymake 
+(flymake-mode -1)
