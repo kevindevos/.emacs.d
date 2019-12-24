@@ -185,7 +185,34 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
 (add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
 (add-hook 'c++-mode-hook (lambda () (load-file "~/.emacs.d/lang/cpp.el")))
+(add-hook 'after-save-hook 'my-flycheck-project-buffers)
 
+;; Flycheck all buffers of current project
+(defun my-flycheck-project-buffers ()
+  "Check syntax with flycheck on every buffer of current project with some major modes."
+  (interactive)
+  (if (and (bound-and-true-p flycheck-mode) (projectile-project-p))
+      (let ((buffers (projectile-project-buffers)))
+	;; remove current buffer and check it first
+	(setq buffers (delete (current-buffer) buffers))
+	(flycheck-buffer)
+	;; for each buffer , switch to it, if has extension, run flycheck on it
+	(save-window-excursion
+	  (dolist (buffer buffers)
+	    (when (valid-major-mode-p (buffer-mode buffer))
+	      (message (concat "Flycheck checking buffer " (buffer-name buffer)))
+	      (switch-to-buffer buffer)
+	      (flycheck-buffer))
+	    (message (concat "Flycheck checked syntax for current project's open buffers.")))))
+    (message "Not in Project or flycheck-mode disabled.")))
+
+(defun buffer-mode (buffer)
+  "Get 'major-mode' of specified BUFFER."
+  (with-current-buffer buffer major-mode))
+
+(defun valid-major-mode-p (mode)
+  "Check whether the specfied major MODE is a valid mode for flycheck checking."
+  (member mode '(c++-mode java-mode emacs-lisp-mode)))
 
 (use-package helm-swoop
   :ensure t
