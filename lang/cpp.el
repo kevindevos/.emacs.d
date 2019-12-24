@@ -10,11 +10,15 @@
 
 (use-package cquery :ensure t
   :init
-  (setq cquery-executable "/Users/kevindevos/cquery/build/cquery"))
+  (setq cquery-executable "/Users/kevindevos/cquery/build/cquery")
+  (setq cquery-extra-init-params
+    '(:extraClangArguments ("-I/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include")))
+  )
 
 (use-package lsp-mode :ensure t
   :config
-  (lsp))
+  (lsp-mode))
 
 ;; Disable flymake 
 (flymake-mode -1)
+(setq lsp-prefer-flymake nil)

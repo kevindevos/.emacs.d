@@ -17,7 +17,6 @@
 (defconst my-leader-flycheck "SPC y")
 
 ;; general.el leader key definers
-
 (general-create-definer my-leader-def :prefix my-leader)
 (general-create-definer my-leader-emacs-def :prefix my-leader-emacs)
 (general-create-definer my-leader-emacs-theme :prefix my-leader-emacs-theme)
@@ -236,7 +235,7 @@
   "pf" 'lsp-ui-peek-jump-forward
   "pr" 'lsp-ui-peek-find-references
   "pi" 'lsp-ui-peek-find-implementation
-  "yl" 'lsp-ui-flycheck-list
+  ;"yl" 'lsp-ui-flycheck-list ; do not use, does not pass the correct includes to clang for some reason
   )
 
 ;; helm swoop M-i
