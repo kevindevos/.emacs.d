@@ -132,6 +132,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 
 (load-file "~/.emacs.d/gtags.el")
+(load-file "~/.emacs.d/help-fns.el")
 (use-package helm-gtags
   :ensure t
   :config
