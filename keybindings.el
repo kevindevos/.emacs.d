@@ -17,7 +17,8 @@
 (defconst my-leader-flycheck "SPC y")
 
 ;; general.el leader key definers
-(general-create-definer my-leader-def :prefix my-leader)
+;; :keymaps 'override in order to "to prevent your leader keybindings from ever being overridden"
+(general-create-definer my-leader-def :prefix my-leader :states '(normal visual emacs) :keymaps 'override)
 (general-create-definer my-leader-emacs-def :prefix my-leader-emacs)
 (general-create-definer my-leader-emacs-theme :prefix my-leader-emacs-theme)
 (general-create-definer my-leader-files-def :prefix my-leader-files)
@@ -58,6 +59,8 @@
 (which-key-add-key-based-replacements "SPC p o" "shell")
 
 (global-set-key (kbd "M-/") 'helm-ag-this-file)
+;; Unbind <SPC> in evil-motion-state-map from <right> to nil so SPC can trigger general leader key
+(define-key evil-motion-state-map (kbd "<SPC>") 'nil)
 
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "zO") 'origami-open-all-nodes)
