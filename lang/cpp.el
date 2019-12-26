@@ -22,6 +22,3 @@
 ;; Disable flymake 
 (flymake-mode -1)
 (setq lsp-prefer-flymake nil)
-
-;; enable ggtags-mode
-(ggtags-mode 1)

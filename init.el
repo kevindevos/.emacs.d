@@ -34,13 +34,22 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (set-exec-path-from-shell-PATH)
 
+
+(use-package ggtags
+  :ensure t
+  :config
+  (setq ggtags-use-idutils t)
+  (setq ggtags-use-project-gtagsconf nil)
+  (setq ggtags-global-mode 1)
+  (setq ggtags-oversize-limit 104857600)
+  (setq ggtags-sort-by-nearness t)
+  )
+
 (setq evil-want-keybinding 'nil)
 (use-package evil
   :ensure t
   :config
-  (progn
-    (evil-mode 1))
-  ;; use evil in *Packages* buffer
+  (evil-mode 1)  ;; use evil in *Packages* buffer
   (add-to-list 'evil-buffer-regexps '("*Packages*" . normal))
   (add-to-list 'evil-buffer-regexps '("*Backtrace*" . normal))
   (add-to-list 'evil-buffer-regexps '("*Help*" . normal))
