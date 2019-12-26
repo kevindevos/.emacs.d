@@ -234,6 +234,8 @@
   "gs" 'lsp-java-generate-to-string
   "ec" 'lsp-java-extract-to-constant 
   "fd" 'lsp-find-definition
+  "fr" 'lsp-find-references
+  "fi" 'lsp-find-implementation
   "pb" 'lsp-ui-peek-jump-backward
   "pf" 'lsp-ui-peek-jump-forward
   "pr" 'lsp-ui-peek-find-references
