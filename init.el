@@ -92,7 +92,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers
-(setq neo-show-hidden-files t) ;; show hidden files in neotree
 (set-face-attribute 'default nil :font "Hack" :height 125) ;; set font size to 12pt , value is 1/10 pt
 (set-default-coding-systems 'unix)
 
@@ -341,12 +340,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(lsp-ui-sideline-show-diagnostics t)
  '(lsp-ui-sideline-show-hover t)
  '(lsp-ui-sideline-show-symbol nil)
- '(neo-show-hidden-files t t)
- '(neo-theme 'ascii)
- '(neo-window-width 35)
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
-   '(treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company neotree projectile magit general helm evil use-package))
+   '(treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories

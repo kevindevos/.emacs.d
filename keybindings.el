@@ -212,7 +212,6 @@
   "f" 'helm-projectile-find-file
   "F" 'helm-projectile-find-file-in-known-projects
   "p" 'helm-projectile-switch-project
-  "t" 'neotree-projectile-action 
   "I" 'projectile-invalidate-cache
   "r" 'helm-projectile-recentf
   "R" 'projectile-remove-known-project
@@ -264,6 +263,8 @@
   "pf" 'lsp-ui-peek-jump-forward
   "pr" 'lsp-ui-peek-find-references
   "pi" 'lsp-ui-peek-find-implementation
+  "le" 'lsp-treemacs-errors-list
+  "s" 'lsp-treemacs-symbols
   ;"yl" 'lsp-ui-flycheck-list ; do not use, does not pass the correct includes to clang for some reason
   )
 
