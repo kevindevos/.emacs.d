@@ -241,6 +241,15 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (setq helm-multi-swoop-edit-save t)
   )
 
+(use-package treemacs
+  :ensure t
+  :config
+  (use-package treemacs-evil :ensure t)
+  (use-package treemacs-projectile :ensure t)
+  (use-package treemacs-magit :ensure t)
+  (use-package lsp-treemacs :ensure t)
+  (treemacs-resize-icons 14))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -334,7 +343,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(neo-window-width 35)
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
-   '(helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company neotree projectile magit general helm evil use-package))
+   '(treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company neotree projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories

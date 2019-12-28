@@ -1,3 +1,35 @@
+;; Create minor mode with some keybindings for modes like treemacs
+(defvar custom-keybindings-keymap (make-keymap) "global custom keybindings.")
+(define-minor-mode custom-keybindings-minor-mode
+  "Global keybindings as a minor mode"
+  nil
+  ;; indicator for mode line
+  " CustomKeybindingsMode"
+  ;; minor mode keymap
+  custom-keybindings-keymap
+  ;; make mode global
+;;  :global 1
+  )
+
+(add-hook 'treemacs-mode-hook (lambda () (custom-keybindings-minor-mode 1)))
+(add-hook 'messages-buffer-mode-hook (lambda () (custom-keybindings-minor-mode 1)))
+
+(defvar my-prefix-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map custom-keybindings-keymap)
+    map))
+(defvar my-windmove-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map my-prefix-map)
+    map))
+(define-key custom-keybindings-keymap (kbd "SPC") my-prefix-map)
+(define-key my-prefix-map (kbd "w") my-windmove-map)
+(define-key my-windmove-map (kbd "l") 'windmove-right)
+(define-key my-windmove-map (kbd "h") 'windmove-left)
+(define-key my-windmove-map (kbd "k") 'windmove-up)
+(define-key my-windmove-map (kbd "j") 'windmove-down)
+
+
 ;; my general.el keybindings
 (defconst my-leader "SPC")
 (defconst my-leader-emacs "SPC q")
@@ -18,7 +50,11 @@
 
 ;; general.el leader key definers
 ;; :keymaps 'override in order to "to prevent your leader keybindings from ever being overridden"
-(general-create-definer my-leader-def :prefix my-leader :states '(normal visual emacs) :keymaps 'override)
+(general-create-definer my-global-leader
+  :prefix "S-SPC"
+  :keymaps 'custom-keybindings-keymap)
+(general-def '(normal visual emacs motion) my-leader (general-simulate-key "S-SPC"))
+;;(general-create-definer my-leader-def :prefix my-leader :states '(normal visual emacs treemacs) :keymaps 'override :global-prefix "S-SPC")
 (general-create-definer my-leader-emacs-def :prefix my-leader-emacs)
 (general-create-definer my-leader-emacs-theme :prefix my-leader-emacs-theme)
 (general-create-definer my-leader-files-def :prefix my-leader-files)
