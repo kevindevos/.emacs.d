@@ -124,7 +124,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (use-package which-key :ensure t :config (which-key-mode))
 (use-package helm :ensure t :config (global-set-key (kbd "M-x") 'helm-M-x))
 (use-package yasnippet :ensure t :config (yas-global-mode 1))
-(use-package projectile :ensure t :config (projectile-mode t))
+(use-package projectile
+  :ensure t
+  :config
+  ;; Use hybrid instead of alien indexing method
+  ;; Alien seems to work for c++, but not for java (does not ignore matches in .gitignore with SPC p f)
+  ;; However hybrid works well for both
+  (setq projectile-indexing-method 'hybrid)
+  (projectile-mode t))
 (use-package helm-projectile :ensure t)
 (use-package info :ensure t)
 (use-package general :ensure t :config (load my-keybindings-file-path))
@@ -348,7 +355,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(projectile-globally-ignored-directories
    '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build" "gradle" ".gradle" ".cquery_cached_index"))
  '(projectile-globally-ignored-file-suffixes '(".class" ".bin" ".lock" ".jar"))
- '(projectile-indexing-method 'alien)
  '(sml/active-background-color "#98ece8")
  '(sml/active-foreground-color "#424242")
  '(sml/inactive-background-color "#4fa8a8")
