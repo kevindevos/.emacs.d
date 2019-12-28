@@ -8,9 +8,9 @@
   (add-to-list 'load-path "elpa")
   (require 'use-package))
 
-(load-file "~/.emacs.d/gtags.el")
-(load-file "~/.emacs.d/help-fns.el")
-(load-file "~/.emacs.d/helm-xref.el")
+(load-file "~/.emacs.d/packages_manual/gtags.el")
+(load-file "~/.emacs.d/packages_manual/help-fns.el")
+(load-file "~/.emacs.d/packages_manual/helm-xref.el")
 
 ;; Garbage Collection higher threshold
 (setq gc-cons-threshold 200000000)
