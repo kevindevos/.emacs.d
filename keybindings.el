@@ -125,18 +125,6 @@
 (define-key dired-mode-map (kbd "<return>") 'dired-find-alternate-file)
 (define-key dired-mode-map (kbd "-") 'dired-create-empty-file)
 
-;; neotree
-(use-package neotree
-  :config
-  (define-key neotree-mode-map (kbd "C-l") 'neotree-select-up-node)
-  (define-key neotree-mode-map (kbd "C-j") 'neotree-enter)
-  (define-key neotree-mode-map (kbd "TAB") 'neotree-stretch-toggle)
-  (define-key neotree-mode-map (kbd "<tab>") 'neotree-stretch-toggle)
-  (define-key neotree-mode-map (kbd "RET") 'neotree-enter)
-  (define-key neotree-mode-map (kbd "<return>") 'neotree-enter)
-  )
-;; Use C-c C-c in neotree mode to set dir to root dir
-
 ;;;;;;;;;;;;;;;;;;; EMACS ;;;;;;;;;;;;;;;;;;;
 
 (my-leader-emacs-def
@@ -159,7 +147,7 @@
   :keymaps 'normal
   "f" 'helm-find-files
   "s" 'save-buffer
-  "t" 'neotree-project-dir-toggle
+  "t" 'treemacs
   "r" 'helm-recentf
   "L" 'helm-locate
   "d" 'dired-jump
@@ -182,7 +170,7 @@
 
 ;; "SPC w"
 (my-leader-windows-def
-  :keymaps 'normal
+  :keymaps '(normal visual)
   "j" 'windmove-down
   "k" 'windmove-up
   "h" 'windmove-left
@@ -282,36 +270,15 @@
 ;; helm swoop M-i
 
 (defun my-lsp-java-generate-constructors ()
-  "Generate Constructors.."
-  (interactive)
+  "Generat (interactive)"
   (lsp-execute-code-action-by-kind "source.generate.constructors"))
 
 (my-leader-git
   :keymaps 'normal
   "s" 'magit-status
   "b" 'magit-blame
+  "l" 'magit-log
   )
-
-;; to indent whole buffer:
-;; Select whole buffer C-x h
-;; Indent region C-M-\
-
-
-;; peek mode keybindings defined already by ls-ui-peek
-;; (define-key map (kbd "M-n") 'lsp-ui-peek--select-next-file)
-;; (define-key map (kbd "<right>") 'lsp-ui-peek--select-next-file)
-;; (define-key map (kbd "M-p") 'lsp-ui-peek--select-prev-file)
-;; (define-key map (kbd "<left>") 'lsp-ui-peek--select-prev-file)
-;; (define-key map (kbd "C-n") 'lsp-ui-peek--select-next)
-;; (define-key map (kbd "n") 'lsp-ui-peek--select-next)
-;; (define-key map (kbd "<down>") 'lsp-ui-peek--select-next)
-;; (define-key map (kbd "C-p") 'lsp-ui-peek--select-prev)
-;; (define-key map (kbd "p") 'lsp-ui-peek--select-prev)
-;; (define-key map (kbd "<up>") 'lsp-ui-peek--select-prev)
-;; (define-key map (kbd "TAB") 'lsp-ui-peek--toggle-file)
-;; (define-key map (kbd "q") 'lsp-ui-peek--abort)
-;; (define-key map (kbd "RET") 'lsp-ui-peek--goto-xref)
-;; (define-key map (kbd "M-RET") 'lsp-ui-peek--goto-xref-other-window)
 
 (my-leader-search
   :keymaps 'normal
@@ -326,16 +293,3 @@
   "t" 'info 
   )
 
-
-;; to comment/uncomment use M-;
-
-;; File navigation in helm-find-files
-;; use C-l to go up a directory
-;; use C-j to go into a selected directory
-
-;; Folding
-;; z-c  evil-close-fold
-;; z-o  evil-open-fold
-
-;; make a word upper case 
-;; M-u
