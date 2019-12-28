@@ -390,29 +390,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(lsp-face-highlight-write ((t (:inherit lsp-face-highlight-read :background "#6688aa" :foreground "gray45" :weight bold))))
  '(region ((t (:background "gray58" :foreground "black")))))
 
-(require 'neotree)
-;; toggle neotree to view the whole project
-(defun neotree-project-dir-toggle ()
-  "Open NeoTree using the project root, using find-file-in-project,
-or the current buffer directory."
-  (interactive)
-  (let ((project-dir
-         (ignore-errors
-           (ffip-project-root)
-           ))
-        (file-name (buffer-file-name))
-        (neo-smart-open t))
-    (if (and (fboundp 'neo-global--window-exists-p)
-             (neo-global--window-exists-p))
-        (neotree-hide)
-      (progn
-        (neotree-show)
-        (if project-dir
-            (neotree-dir project-dir))
-        (if file-name
-            (company-abort)
-          (indent-for-tab-command))))))
-
 ;; allow usage of dired-find-alternate-file without warning
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -424,3 +401,10 @@ or the current buffer directory."
 
 ;; show emacs-init-time on startup
 (message "Initialized in %s" (emacs-init-time))
+
+;; Ignore buffers that include "helm" in the name
+(defun my-buffer-predicate (buffer)
+  (if (string-match "helm" (buffer-name buffer))
+      nil
+    t))
+(set-frame-parameter nil 'buffer-predicate 'my-buffer-predicate)

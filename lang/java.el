@@ -14,9 +14,6 @@
 
 (require 'all-the-icons)
 
-(require 'ggtags)
-(ggtags-mode)
-
 (setq company-backends (delete "company-capf" company-backends))
 
 (set-buffer-file-coding-system 'unix)
