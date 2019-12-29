@@ -259,6 +259,7 @@
   "fd" 'lsp-find-definition
   "fr" 'lsp-find-references
   "fi" 'lsp-find-implementation
+  "fo" 'ff-find-other-file ;; to switch to .h file from .cpp or from .cpp to .h quickly
   "pb" 'lsp-ui-peek-jump-backward
   "pf" 'lsp-ui-peek-jump-forward
   "pr" 'lsp-ui-peek-find-references
