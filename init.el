@@ -27,6 +27,9 @@
 ;; buffer file encoding
 (set-buffer-file-coding-system 'unix)
 
+;; highlight cursor line
+(global-hl-line-mode 1)
+
 ;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -92,7 +95,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers
-(set-face-attribute 'default nil :font "Hack" :height 125) ;; set font size to 12pt , value is 1/10 pt
+(set-face-attribute 'default nil :font "Hack" :height 105) ;; set font size to 12pt , value is 1/10 pt
 (set-default-coding-systems 'unix)
 
 ;; disable ring bell sound
@@ -101,10 +104,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 ;; automatically add ending braces like } on open
 (electric-pair-mode)
 
-;; (use-package material-theme :ensure t
-;;   :config
-;;   (load-theme 'material-light t)
-;;   )
 (use-package doom-themes :ensure t
   :config
   (load-theme 'doom-sourcerer t)
@@ -390,6 +389,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; If there is more than one, they won't work right.
  '(helm-swoop-target-line-face ((t (:background "gray100" :foreground "MediumPurple1" :inverse-video t))))
  '(highlight ((t (:foreground "#1d2127"))))
+ '(hl-line ((t (:background "gray20"))))
  '(lsp-face-highlight-read ((t (:foreground "#DFDFDF" :weight bold))))
  '(lsp-face-highlight-textual ((t (:background "Black" :foreground "gray73" :weight bold))))
  '(lsp-face-highlight-write ((t (:inherit lsp-face-highlight-read :background "#6688aa" :foreground "gray45" :weight bold))))
