@@ -14,7 +14,9 @@
 
 (use-package lsp-mode :ensure t
   :config
-  (lsp))
+  (lsp)
+  (setq flycheck-checker 'c/c++-clang)
+  )
 
 ;; Disable flymake 
 (flymake-mode -1)
