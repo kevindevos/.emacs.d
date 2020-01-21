@@ -30,17 +30,27 @@
 ;; highlight cursor line
 (global-hl-line-mode 1)
 
-;; source https://stackoverflow.com/questions/8606954/path-and-exec-path-set-but-emacs-does-not-find-executable
+;; max column indicator
+(global-display-fill-column-indicator-mode)
+(setq-default fill-column 80)
+
+;; auto fill-paragraph (adjust lines over the indicator as you type to be under
+;; the line)
+(setq-default auto-fill-function 'do-auto-fill)
+
+;; source
+;; https://stackoverflow.com/questions/8606954/
+;; path-and-exec-path-set-but-emacs-does-not-find-executable
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
-This is particularly useful under Mac OSX, where GUI apps are not started from a shell."
+This is particularly useful under Mac OSX, where GUI apps are not
+started from a shell."
   (interactive)
-  (let ((path-from-shell (replace-regexp-in-string "[ \t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+  (let ((path-from-shell (replace-regexp-in-string "[\t\n]*$" "" (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
 (set-exec-path-from-shell-PATH)
-
 
 (use-package ggtags
   :ensure t
@@ -348,7 +358,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(lsp-ui-sideline-show-symbol nil)
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
-   '(treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company projectile magit general helm evil use-package))
+   '(fill-column-indicator doom-modeline treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
