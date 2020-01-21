@@ -95,7 +95,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers
-(set-face-attribute 'default nil :font "Hack" :height 105) ;; set font size to 12pt , value is 1/10 pt
+(set-face-attribute 'default nil :font "Hack" :height 120) ;; set font size to 12pt , value is 1/10 pt
 (set-default-coding-systems 'unix)
 
 ;; disable ring bell sound
