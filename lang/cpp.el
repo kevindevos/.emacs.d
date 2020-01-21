@@ -10,6 +10,11 @@
   (flycheck-mode t)
   (setq flycheck-clang-include-path (list "/Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include"))
   (setq flycheck-clang-standard-library "libc++")
+  ;; TODO specific c++ flycheck versions for diferent projects
+  ;; for now temporarily set flycheck to c++17
+  ;; (setq flycheck-gcc-language-standard "c++17")
+  ;; Note that we use clang here, not gcc
+  (setq flycheck-clang-language-standard "c++17")
   (setup-flycheck-clang-project-path)
   )
 
