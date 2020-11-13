@@ -1,3 +1,14 @@
+
+(use-package ccls
+  :after projectile
+  :custom
+  (ccls-args nil)
+  (ccls-executable (executable-find "ccls"))
+  (projectile-project-root-files-top-down-recurring
+   (append '("compile_commands.json" ".ccls")
+           projectile-project-root-files-top-down-recurring))
+  :config (push ".ccls-cache" projectile-globally-ignored-directories))
+
 (require 'flycheck)
 (defun setup-flycheck-clang-project-path ()
   (let ((root (ignore-errors (projectile-project-root))))
@@ -20,9 +31,9 @@
 
 (set-buffer-file-coding-system 'unix)
 
-(use-package cquery :ensure t
-  :init
-  (setq cquery-executable "/Users/kevindevos/cquery/build/cquery"))
+;; (use-package cquery :ensure t
+;;   :init
+;;   (setq cquery-executable "/Users/kevindevos/cquery/build/cquery"))
 
 (use-package lsp-mode :ensure t
   :config
@@ -33,5 +44,4 @@
 ;; Disable flymake 
 (flymake-mode -1)
 (setq lsp-prefer-flymake nil)
-
 

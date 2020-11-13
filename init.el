@@ -105,7 +105,8 @@ started from a shell."
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers
-(set-face-attribute 'default nil :font "Hack" :height 120) ;; set font size to 12pt , value is 1/10 pt
+(set-face-attribute 'default nil :font "Hack" :height 140) 
+
 (set-default-coding-systems 'unix)
 
 ;; disable ring bell sound
@@ -144,6 +145,7 @@ started from a shell."
 (use-package helm-projectile :ensure t)
 (use-package info :ensure t)
 (use-package general :ensure t :config (load my-keybindings-file-path))
+
 
 ;; set default company backends ( does not include company-eclim company-xcode and some others that were included beforehand
 (use-package company
@@ -289,6 +291,7 @@ started from a shell."
    '(".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".lof" ".glo" ".idx" ".lot" ".svn/" ".hg/" ".git/" ".bzr/" "CVS/" "_darcs/" "_MTN/" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".dfsl" ".pfsl" ".d64fsl" ".p64fsl" ".lx64fsl" ".lx32fsl" ".dx64fsl" ".dx32fsl" ".fx64fsl" ".fx32fsl" ".sx64fsl" ".sx32fsl" ".wx64fsl" ".wx32fsl" ".fasl" ".ufsl" ".fsl" ".dxl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".class"))
  '(cquery-extra-args nil)
  '(cquery-extra-init-params nil)
+ '(cquery-project-root-function '(projectile-project-root))
  '(custom-safe-themes
    '("1ca1f43ca32d30b05980e01fa60c107b02240226ac486f41f9b790899f6f6e67" "8c75e2bdf8d1293c77a752dd210612cfb99334f7edd360a42a58a8497a078b35" "5e0b63e0373472b2e1cf1ebcc27058a683166ab544ef701a6e7f2a9f33a23726" "a9c619535d63719a15f22e3c450a03062d3fed1e356ef96d33015849c4c43946" "4a9f595fbffd36fe51d5dd3475860ae8c17447272cf35eb31a00f9595c706050" "669e05b25859b9e5b6b9809aa513d76dd35bf21c0f16d8cbb80fb0727dc8f842" "41039913efab185af1ec1b13ff4df36d6941994d5e3dee39791f30fcd94b42be" "5c9a906b076fe3e829d030a404066d7949e2c6c89fc4a9b7f48c054333519ee7" "b60f08ddc98a95485ec19f046a81d5877b26ab80a67782ea5b91a00ea4f52170" "e7666261f46e2f4f42fd1f9aa1875bdb81d17cc7a121533cad3e0d724f12faf2" "de43de35da390617a5b3e39b6b27c107cc51271eb95cceb1f43d13d9647c911d" "e47c0abe03e0484ddadf2ae57d32b0f29f0b2ddfe7ec810bd6d558765d9a6a6c" "6cbf6003e137485fb3f904e76fb15bc48abc386540f43f54e2a47a9884e679f6" "bc99493670a29023f99e88054c9b8676332dda83a37adb583d6f1e4c13be62b8" "5091eadbb87fa0a168a65f2c3e579d1a648d764f12ab9d3ab7bdefca709cd2a5" "32fd809c28baa5813b6ca639e736946579159098d7768af6c68d78ffa32063f4" "9d54f3a9cf99c3ffb6ac8e84a89e8ed9b8008286a81ef1dbd48d24ec84efb2f1" "a4b9eeeabde73db909e6b080baf29d629507b44276e17c0c411ed5431faf87dd" "15ba8081651869ec689c9004288bed79003de5b4ee9c51a9d4a208d9e3439706" "eb94e44599a45c495ad472ad551a40b87cbc4bae9631211e7a78d72b102c61b1" "1897b97f63e91a792e8540c06402f29d5edcbfb0aafd64b1b14270663d6868ee" "a02836a5807a687c982d47728e54ff42a91bc9e6621f7fe7205b0225db677f07" "4b0b568d63b1c6f6dddb080b476cfba43a8bbc34187c3583165e8fb5bbfde3dc" "a4fa3280ffa1f2083c5d4dab44a7207f3f7bcb76e720d304bd3bd640f37b4bef" "c6b93ff250f8546c7ad0838534d46e616a374d5cb86663a9ad0807fd0aeb1d16" "92d8a13d08e16c4d2c027990f4d69f0ce0833c844dcaad3c8226ae278181d5f3" "732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" "a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "acfac6b14461a344f97fad30e2362c26a3fe56a9f095653832d8fc029cb9d05c" "e396098fd5bef4f0dd6cedd01ea48df1ecb0554d8be0d8a924fb1d926f02f90f" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "30289fa8d502f71a392f40a0941a83842152a68c54ad69e0638ef52f04777a4c" default))
  '(debug-on-error nil)
@@ -358,7 +361,7 @@ started from a shell."
  '(lsp-ui-sideline-show-symbol nil)
  '(objed-cursor-color "#aa4450")
  '(package-selected-packages
-   '(fill-column-indicator doom-modeline treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company projectile magit general helm evil use-package))
+   '(ccls cmake-ide fill-column-indicator doom-modeline treemacs treemacs-evil treemacs-icons-dired treemacs-magit treemacs-projectile helm-xref doom-themes cquery lsp-python-ms lsp-python python-mode lsp-clangd groovy-mode gradle-mode flymake-gradle evil-ediff evil-magit dired material-theme git-gutter rainbow-mode wgrep helm-swoop lsp helm-config google-c-style flycheck-pos-tip lsp-ui spacemacs-theme company-box lsp-treemacs flucui-themes all-the-icons lsp-java helm-gtags ggtags dap-mode helm-lsp company-lsp lsp-mode eglot android-mode rainbow-delimiters omnisharp google-this flycheck-gradle lispy helm-projectile origami hideshow-org ag helm-ag evil-surround color-theme-sanityinc-tomorrow telephone-line zone-nyan plan9-theme flycheck yasnippet company projectile magit general helm evil use-package))
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(projectile-completion-system 'helm)
  '(projectile-globally-ignored-directories
