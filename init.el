@@ -214,10 +214,7 @@ started from a shell."
 (use-package projectile
   :ensure t
   :config
-  ;; Use hybrid instead of alien indexing method
-  ;; Alien seems to work for c++, but not for java (does not ignore matches in .gitignore with SPC p f)
-  ;; However hybrid works well for both
-  (setq projectile-indexing-method 'hybrid)
+  (setq projectile-indexing-method 'alien)
   (projectile-mode t))
 (use-package helm-projectile :ensure t)
 (use-package info :ensure t)
