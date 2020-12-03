@@ -101,7 +101,7 @@
 (load-file "~/.emacs.d/packages_manual/helm-xref.el")
 
 ;; Garbage Collection higher threshold
-(setq gc-cons-threshold 200000000)
+(setq gc-cons-threshold 2000000000)
 
 ;; macOS titlebar
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
