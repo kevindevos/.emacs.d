@@ -190,7 +190,7 @@ started from a shell."
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (add-to-list 'default-frame-alist '(width . 112))
 (set-scroll-bar-mode nil) ;; disable scrollbar in all buffers
-(set-face-attribute 'default nil :font "Hack" :height 140) 
+(set-face-attribute 'default nil :font "Hack" :height 130) 
 
 (set-default-coding-systems 'unix)
 
@@ -283,11 +283,17 @@ started from a shell."
   (add-hook 'python-mode-hook (lambda () (load-file "~/.emacs.d/lang/python.el"))))
 
 ;; language config hooks
+(use-package web-mode :ensure t :defer)
 (setf (cdr (rassoc 'c-or-c++-mode auto-mode-alist)) 'c++-mode) ;; ERROR consp nil?
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode) '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.java\\'" . java-mode))
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 (add-to-list 'auto-mode-alist '("\\.gradle\\'" . groovy-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-hook 'web-mode-hook (lambda () (load-file '"~/.emacs.d/lang/web.el")))
 (add-hook 'java-mode-hook (lambda () (load-file '"~/.emacs.d/lang/java.el")))
 (add-hook 'emacs-lisp-mode-hook (lambda () (load-file "~/.emacs.d/lang/elisp.el")))
 (add-hook 'csharp-mode-hook (lambda () (load-file "~/.emacs.d/lang/csharp.el")))
